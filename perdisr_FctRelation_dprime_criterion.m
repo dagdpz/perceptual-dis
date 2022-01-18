@@ -76,9 +76,9 @@ for i_sample = 1: length(AllComb)
     c(i_sample,3) = p;
     
     %% Rules -> color scheme
-    if  H(1) > H(2) &&  CR(1) > CR(2) % decrease in H(2) and CR(2) 
-        %Does is lead to a significant shift in dprime, criterion or both? 
-        if d(i_sample,3)< 0.05 && c(i_sample,3)< 0.05 
+    if  H(1) > H(2) &&  CR(1) > CR(2) % decrease in H(2) and CR(2)
+        %Does is lead to a significant shift in dprime, criterion or both?
+        if d(i_sample,3)< 0.05 && c(i_sample,3)< 0.05
             IncreaseErrors_ChangeSensCrit= IncreaseErrors_ChangeSensCrit +1;
             AllComb{5,i_sample} = 'IncreaseErrors_ChangeSensCrit';
             AllComb{6,i_sample} = IncreaseErrors_ChangeSensCrit;
@@ -90,9 +90,9 @@ for i_sample = 1: length(AllComb)
         elseif d(i_sample,3) < 0.05
             IncreaseErrors_ChangeSensitivtiy = IncreaseErrors_ChangeSensitivtiy +1 ;
             AllComb{5,i_sample} = 'IncreaseErrors_ChangeSensitivtiy';
-            AllComb{6,i_sample} = IncreaseErrors_ChangeSensitivtiy; 
+            AllComb{6,i_sample} = IncreaseErrors_ChangeSensitivtiy;
             Plot = 1;
-
+            
         else
             IncreaseErrors_NoSigChange = IncreaseErrors_NoSigChange +1;
             AllComb{5,i_sample} = 'IncreaseErrors_NoSigChange';
@@ -104,7 +104,7 @@ for i_sample = 1: length(AllComb)
         
         
     elseif H(1) > H(2) &&  CR(1) < CR(2)
-        if d(i_sample,3)< 0.05 && c(i_sample,3)< 0.05 
+        if d(i_sample,3)< 0.05 && c(i_sample,3)< 0.05
             IncreaseNoGo_ChangeSensCrit= IncreaseNoGo_ChangeSensCrit +1;
             AllComb{5,i_sample} = 'IncreaseNoGo_ChangeSensCrit';
             AllComb{6,i_sample} = IncreaseNoGo_ChangeSensCrit;
@@ -115,8 +115,8 @@ for i_sample = 1: length(AllComb)
         elseif d(i_sample,3) < 0.05
             IncreaseNoGo_ChangeSensitivtiy = IncreaseNoGo_ChangeSensitivtiy +1 ;
             AllComb{5,i_sample} = 'IncreaseNoGo_ChangeSensitivtiy';
-            AllComb{6,i_sample} = IncreaseNoGo_ChangeSensitivtiy; 
-
+            AllComb{6,i_sample} = IncreaseNoGo_ChangeSensitivtiy;
+            
         else
             IncreaseNoGo_NoSigChange = IncreaseNoGo_NoSigChange +1;
             AllComb{5,i_sample} = 'IncreaseNoGo_NoSigChange';
@@ -127,29 +127,29 @@ for i_sample = 1: length(AllComb)
         color = [1 1 1];
     end
     
-
+    
     
     %% Graph
     if     Plot  == 1
-              subplot(2,1,1)
+        subplot(2,1,1)
         plot(d(i_sample,1), c(i_sample,1), 'o','color','k' ,'MarkerSize',7,'markerfacecolor','k'); hold on
         plot(d(i_sample,2), c(i_sample,2), 'o','color','b' ,'MarkerSize',7,'markerfacecolor','b'); hold on
         line([d(i_sample,1), d(i_sample,2)], [c(i_sample,1), c(i_sample,2)],'color','k')
         
     elseif Plot == 2
-       subplot(2,1,2)
-
+        subplot(2,1,2)
+        
         plot(d(i_sample,1), c(i_sample,1), 'o','color','k' ,'MarkerSize',7,'markerfacecolor','k'); hold on
         plot(d(i_sample,2), c(i_sample,2), 'o','color','b' ,'MarkerSize',7,'markerfacecolor','b'); hold on
         line([d(i_sample,1), d(i_sample,2)], [c(i_sample,1), c(i_sample,2)],'color','k')
-%         
-%     
-%         %PreInjection
-%         plot(d(i_sample,1), c(i_sample,1), 'o','color','k' ,'MarkerSize',3,'markerfacecolor',color); hold on
-%         
-%         subplot(3,1,3)
-%         %Post-Injection
-%         plot(d(i_sample,2), c(i_sample,2), 'o','color','b' ,'MarkerSize',3,'markerfacecolor',color); hold on
+        %
+        %
+        %         %PreInjection
+        %         plot(d(i_sample,1), c(i_sample,1), 'o','color','k' ,'MarkerSize',3,'markerfacecolor',color); hold on
+        %
+        %         subplot(3,1,3)
+        %         %Post-Injection
+        %         plot(d(i_sample,2), c(i_sample,2), 'o','color','b' ,'MarkerSize',3,'markerfacecolor',color); hold on
         
     end
 end
@@ -158,14 +158,14 @@ ylabel(['criterion'])
 xlabel(['drpime'])
 
 
-%% Which cases have an increase in dprime? 
+%% Which cases have an increase in dprime?
 
-Idx = find(isnan([AllComb{6,:}]) == 0); 
-Idx = find(isnan([AllComb{6,:}]) == 0); 
+Idx = find(isnan([AllComb{6,:}]) == 0);
+Idx = find(isnan([AllComb{6,:}]) == 0);
 Case = AllComb(:,Idx);
-find([AllComb{5,:}] == 0); 
-d( Idx, :); 
-c( Idx, :); 
+find([AllComb{5,:}] == 0);
+d( Idx, :);
+c( Idx, :);
 
 
 
