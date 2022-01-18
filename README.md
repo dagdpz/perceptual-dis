@@ -1,2 +1,2 @@
 # perceptual-dis
-SDT simulations and code for the perceptual discrimination / distractor study
+SDT simulations and code for the perceptual **dis**crimination / **dis**tractor study
