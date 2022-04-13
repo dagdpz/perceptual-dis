@@ -1,4 +1,4 @@
-function [ H, M, FA, CR , Sensitvity_Change, StimulusType] = SetScenario_ForDPulvInacManuscript( NameScenario )
+function [ H, M, FA, CR , Sensitvity_Change, StimulusType] = perdisr_SetScenario_ForMicrostimulation( NameScenario )
 % Which secenario you want to run? 
 
 %% Overview of all included Scenarios %%
@@ -9,11 +9,13 @@ function [ H, M, FA, CR , Sensitvity_Change, StimulusType] = SetScenario_ForDPul
 % scenario = 'SingleStimuli_EasyDistr_Post_ContraPerceptualDeficit' 
 
 %%%%%%% DOUBLE SAME STIMULI  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%scenario = 'DoubleSameStimuli_EasyDiscr_Post_IpsiSpatialBias_Vers1_NoPerceptualDeficit'; %presentation
-%scenario = 'DoubleSameStimuli_DiffDiscr_Post_IpsiSpatialBias_Vers1_NoPerceptualDeficit'; %presentation
-% scenario = 'DoubleSameStimuli_DiffDiscr_Post_ContraPerceptualDeficit';%presentation
-% scenario = 'DoubleSameStimuli_EasyDiscr_Post_ContraPerceptualDeficit';%presentation
+%scenario = 'DS_2HF_Diff_LateMicrostim_PerceptualEffect'; %presentation
+%scenario = 'DS_2HF_Easy_LateMicrostim_PerceptualEffect'; %presentation
+%scenario = 'DS_2HF_Diff_LateMicrostim_ResponseBias_TowardsContra'; %presentation
+%scenario = 'DS_2HF_Easy_LateMicrostim_ResponseBias_TowardsContra';%presentation
 
+%scenario = 'DS_2HF_Diff_LateMicrostim_ResponseBias_TowardsContra'; %presentation
+%scenario = 'DS_2HF_Easy_LateMicrostim_ResponseBias_TowardsContra';%presentation
 
 %%%%%%% 2HF: DOUBLE D-T STIMULI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % scenario = '2HF_DoubleD-Tstimuli_DifficultDistr_Post_BilateralPerceptualDeficit';%(Presentation. GENERAL PERCEPTUAL )
@@ -164,23 +166,16 @@ switch NameScenario
         FA(4)  = FA(2);
         CR(4)  = CR(2);
       
-    case 'DoubleSameStimuli_EasyDiscr_Post_IpsiSpatialBias_Vers1_NoPerceptualDeficit';
-        disp('DoubleSameStimuli - EasyDiscr- Post: ipsi spatial Bias (Vers1,saccade), NO perceptual deficit')
+    case 'DS_2HF_Easy_LateMicrostim_ResponseBias_TowardsContra';
+        disp('DS_2HF_Easy_LateMicrostim_ResponseBias_TowardsContra')
         StimulusType = 'DoubleSameStimuli';
         Sensitvity_Change = 0; 
-
-        % A condition for double stimuli: Fixation is the same for contra vs ipsi M(1) = M(2)
-        % spatial-saccade choice bias  (ipsi) without same discrimination performance
-        % Pre: no choice bias -> Post: ipsi choice bias -> fixations do not change for both hemifields
-        % Post: ipsi targets are highly selected
-        % H(1) + M(1) + H(2) should add to 1
-        % FA(1) + CR(1) + FA(2) should add to 1
-        
+  
         % contra pre
         H(1)   = 0.45; %0.45;
         M(1)   = 0.01;
-        FA(1)  = 0.01;
-        CR(1)  = 0.94;
+        FA(1)  = 0.05;
+        CR(1)  = 0.90;
         
         % ipsi pre
         H(2)   = 0.54;
@@ -190,19 +185,19 @@ switch NameScenario
         
         sb = 0.27;
         % contra post
-        H(3)   = H(1)- sb ; %less saccades to contra
+        H(3)   = H(1)+ sb ; %less saccades to contra
         M(3)   = M(1);
-        FA(3)  = FA(1); %less saccades to contra
-        CR(3)  = CR(1) ;
+        FA(3)  = FA(1)+ sb; %less saccades to contra
+        CR(3)  = CR(1)- sb ;
         
         % ispi post
-        H(4)   = H(2)+ sb ; %more saccades to ipsi
-        M(4)   = M(3);
-        FA(4)  = FA(2);
-        CR(4)  = CR(3);
+        H(4)   = H(2)- sb; %visual display changes
+        M(4)   = M(3); %visual display changes
+        FA(4)  = FA(2); %visual display changes
+        CR(4)  = CR(3); %visual display changes
            
-    case 'DoubleSameStimuli_DiffDiscr_Post_IpsiSpatialBias_Vers1_NoPerceptualDeficit';
-        disp('DoubleSameStimuli - DiffDiscr - Post: ipsi spatial Bias (Vers1,saccade), NO perceptual deficit')
+    case 'DS_2HF_Diff_LateMicrostim_ResponseBias_TowardsContra';
+        disp('DS_2HF_Diff_LateMicrostim_ResponseBias_TowardsContra')
         StimulusType = 'DoubleSameStimuli';
         Sensitvity_Change = 0; 
 
@@ -216,30 +211,30 @@ switch NameScenario
         % contra pre
         H(1)   = 0.49; %0.45;
         M(1)   = 0.01;
-        FA(1)  = 0.3;
-        CR(1)  = 0.5;
+        FA(1)  = 0.45;
+        CR(1)  = 0.16;
         
         % ipsi pre
         H(2)   = 0.50;
         M(2)   = M(1);
-        FA(2)  = 0.2;
+        FA(2)  = 0.39;
         CR(2)  = CR(1);
         
-        sb = 0.19;
+        sb = 0.15;
         % contra post
-        H(3)   = H(1)- sb ; %less saccades to contra
+        H(3)   = H(1)+ sb ; %less saccades to contra
         M(3)   = M(1);
-        FA(3)  = FA(1)- sb; %less saccades to contra
+        FA(3)  = FA(1)+ sb; %less saccades to contra
         CR(3)  = CR(1) ;
         
         % ispi post
-        H(4)   = H(2)+ sb ; %more saccades to ipsi
+        H(4)   = H(2)- sb ; %more saccades to ipsi
         M(4)   = M(3);
-        FA(4)  = FA(2)+ sb;
+        FA(4)  = FA(2)- sb;
         CR(4)  = CR(3);
 
-    case 'DoubleSameStimuli_DiffDiscr_Post_ContraPerceptualDeficit';
-        disp('Double Stimuli - Post: contra perceptual deficit')
+    case 'DS_2HF_Diff_LateMicrostim_PerceptualEffect';
+        disp('Dbl Same Stim - Post: contra perceptual deficit')
         StimulusType = 'DoubleSameStimuli';
         Sensitvity_Change = 1; 
         % perceptual deficit: increasing errors
@@ -259,47 +254,83 @@ switch NameScenario
         
         sb = 0.2;
         % contra post
-        H(3)   = H(1)- sb ;
-        M(3)   = M(1)+ sb; %contra fixation
-        FA(3)  = FA(1)+ sb;%contra Saccade
-        CR(3)  = CR(1)- sb;
+        H(3)   = H(1)+ sb ;
+        M(3)   = M(1); %contra fixation
+        FA(3)  = FA(1)- sb;%contra Saccade
+        CR(3)  = CR(1); %- sb;
         
         % ispi post
-        H(4)   = H(2)- (sb/5) ; %visual display changes
-        M(4)   = M(3)+ (sb/5); %visual display changes
-        FA(4)  = FA(2)- (sb/5); %visual display changes
-        CR(4)  = CR(3)+ (sb/5); %visual display changes
+        H(4)   = H(2)- sb; %- (sb/5) ; %visual display changes
+        M(4)   = M(3); %+ (sb/5); %visual display changes
+        FA(4)  = FA(2)+ sb;  %- (sb/5); %visual display changes
+        CR(4)  = CR(3); %+ (sb/5); %visual display changes
         
         
-    case 'DoubleSameStimuli_EasyDiscr_Post_ContraPerceptualDeficit';
+    case 'DS_2HF_Easy_LateMicrostim_PerceptualEffect';
         disp('Double Stimuli - EasyDiscr-  Post: contra perceptual deficit ')
         StimulusType = 'DoubleSameStimuli';
         Sensitvity_Change = 1; 
         % contra pre
         H(1)   = 0.45; %0.45;
         M(1)   = 0.01;
-        FA(1)  = 0.01;
-        CR(1)  = 0.92;
+        FA(1)  = 0.05;
+        CR(1)  = 0.90;
         
         % ipsi pre
         H(2)   = 0.54;
         M(2)   = M(1);
-        FA(2)  = 0.07;
+        FA(2)  = 0.05;
         CR(2)  = CR(1);
   
-        sb = 0.2;
+        sb = 0.25;
         % contra post
-        H(3)   = H(1)- sb ;
-        M(3)   = M(1)+ sb; %contra fixation
-        FA(3)  = FA(1)+ sb ;%contra Saccade
-        CR(3)  = CR(1)- sb;
+        H(3)   = H(1)+ sb ;
+        M(3)   = M(1)- sb; %contra fixation
+        FA(3)  = FA(1) ;%contra Saccade
+        CR(3)  = CR(1);
         
         % ispi post
-        H(4)   = H(2)- (sb/5) ; %visual display changes
-        M(4)   = M(3)+ (sb/5); %visual display changes
-        FA(4)  = FA(2)+ (sb/5); %visual display changes
-        CR(4)  = CR(3)- (sb/5); %visual display changes
+        H(4)   = H(2)+ (sb/5); %visual display changes
+        M(4)   = M(3)- (sb/5); %visual display changes
+        FA(4)  = FA(2)+ (sb/4); %visual display changes
+        CR(4)  = CR(3)- (sb/4); %visual display changes
+
+         case 'DS_2HF_Diff_EarlyMicrostim_ResponseBias_TowardsContra';
+        disp('DS_2HF_Diff_LateMicrostim_ResponseBias_TowardsContra')
+        StimulusType = 'DoubleSameStimuli';
+        Sensitvity_Change = 0; 
+
+        % A condition for double stimuli: Fixation is the same for contra vs ipsi M(1) = M(2)
+        % spatial-saccade choice bias  (ipsi) without same discrimination performance
+        % Pre: no choice bias -> Post: ipsi choice bias -> fixations do not change for both hemifields
+        % Post: ipsi targets are highly selected
+        % H(1) + M(1) + H(2) should add to 1
+        % FA(1) + CR(1) + FA(2) should add to 1
         
+        % contra pre
+        H(1)   = 0.49; %0.45;
+        M(1)   = 0.01;
+        FA(1)  = 0.45;
+        CR(1)  = 0.16;
+        
+        % ipsi pre
+        H(2)   = 0.50;
+        M(2)   = M(1);
+        FA(2)  = 0.39;
+        CR(2)  = CR(1);
+        
+        sb = 0.15;
+        % contra post
+        H(3)   = H(1)+ sb ; %less saccades to contra
+        M(3)   = M(1);
+        FA(3)  = FA(1)+ sb; %less saccades to contra
+        CR(3)  = CR(1) ;
+        
+        % ispi post
+        H(4)   = H(2)- sb ; %more saccades to ipsi
+        M(4)   = M(3);
+        FA(4)  = FA(2)- sb;
+        CR(4)  = CR(3);
     case 'Double Stimuli - Pre: No spatial choice bias & Post: perceptual deficit';
         disp('Double Stimuli - Pre: No spatial choice bias & Post: perceptual deficit')
         StimulusType = 'DoubleSameStimuli';
@@ -424,10 +455,10 @@ switch NameScenario
         H(3)   = H(1)- sb ; % less saccades to contra T
         M(3)   = M(1)+ sb;
         FA(3)  = FA(1)+ sb; %% more saccades to contra D
-        CR(3)  = CR(1);
+        CR(3)  = CR(1)- sb ;
         
         % ispi post
-        H(4)   = H(2)- sb ; % less saccades to ipsi T
+        H(4)   = H(2); % less saccades to ipsi T
         M(4)   = CR(3);
         FA(4)  = FA(2) ;
         CR(4)  = M(3);

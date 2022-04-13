@@ -1,6 +1,8 @@
  function perdisr_Simulate_SpatialSelectionHypo_PercepDeficitHypo(NameScenario)
 %% Inputs
 % Name of the simulated Scenario (all predifined scenarios can be found in SetScenario...) 
+
+% perdisr_Simulate_SpatialSelectionHypo_PercepDeficitHypo('DS_2HF_Easy_LateMicrostim_PerceptualEffect') 
 %% Outputs 
 % 4
 %%
@@ -22,8 +24,9 @@ Color.Contra = [1 0 1 ];
 IndependentCalculation = 0; % for double stimuli, using all three outcomes (dependent) or only two out of three (independent for contra/ipsi)
 n_trials = 100; % for each stimulus condition
 
-%[ H, M, FA, CR , Sensitvity_Change, StimulusType] = SetScenario( NameScenario ); 
-[ H, M, FA, CR , Sensitvity_Change, StimulusType] = SetScenario_ForDPulvInacManuscript( NameScenario ); 
+%[ H, M, FA, CR , Sensitvity_Change, StimulusType] = perdisr_SetScenario( NameScenario ); 
+[ H, M, FA, CR , Sensitvity_Change, StimulusType] = perdisr_SetScenario_ForDPulvInacManuscript( NameScenario ); 
+%[ H, M, FA, CR , Sensitvity_Change, StimulusType] = perdisr_SetScenario_ForMicrostimulation( NameScenario ); 
 
 % Enter the Proportion for Hits, Misses, FA, CR
 H = single(H*n_trials);
@@ -293,7 +296,11 @@ if IndependentCalculation == 1
     
 else
     %different proprotions of trials for hitrate & falsealarm dependent on type of Stimuli
-    if strcmp(StimulusType , 'DoubleSameStimuli')
+    if strcmp(StimulusType , 'Sgl_Stimuli')
+    pHit = H ./ (H + M);
+    pFA = FA ./ (FA + CR);
+           
+    elseif strcmp(StimulusType , 'DoubleSameStimuli')
         
         H_ = [H(2) H(1) H(4) H(3) ];
         FA_ = [FA(2) FA(1) FA(4) FA(3) ];
@@ -743,9 +750,9 @@ a.Label.String = 'criterion';
         
 if SaveGraph
     h = figure(2);
-    print(h,['Y:\Projects\Pulv_distractor_spatial_choice\SDT\SimulationsPredictions' ,filesep,'png',filesep, NameScenario, '.png'], '-dpng')
+    print(h,['Y:\Projects\Pulv_distractor_spatial_choice\Inactivation\SimulationsPredictions' ,filesep,'png',filesep, NameScenario, '.png'], '-dpng')
     set(h,'PaperPositionMode','auto')
-    compl_filename =  ['Y:\Projects\Pulv_distractor_spatial_choice\SDT\SimulationsPredictions' ,filesep,'ai', filesep, NameScenario, '.ai'] ;
+    compl_filename =  ['Y:\Projects\Pulv_distractor_spatial_choice\Inactivation\SimulationsPredictions' ,filesep,'ai', filesep, NameScenario, '.ai'] ;
     print(h,'-depsc',compl_filename);
     %close all;
 end
@@ -783,15 +790,12 @@ if plot_mainExpectations
 Settings.Graph.cmap = colormap( a, cbrewer('div', 'RdYlGn', 100)); %colormap(flip(linspecer));
 scatter(pFAR_S,pHR_S,60,dprime_S, 'filled'); hold on;
 
-%a = colorbar;
-%pos=get(cb,'Position');
-%a.Label.String = 'Sensitivity';
+
     
    elseif Sensitvity_Change == 0; 
 Settings.Graph.cmap = colormap(a,cbrewer( 'div', 'BrBG', 100)); %colormap(flip(linspecer));
 scatter(pFAR_S,pHR_S,60,criterion_S, 'filled'); hold on;
-%a = colorbar;
-%a.Label.String = 'Criterion';
+
    end
     
     plot([pFA(2),pFA(4)], [pHit(2),pHit(4)], 'o-','color',Color.Ipsi, 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1],'LineWidth', LineWith); hold on;
@@ -801,7 +805,6 @@ scatter(pFAR_S,pHR_S,60,criterion_S, 'filled'); hold on;
     plot([pFA(1),pFA(3)], [pHit(1),pHit(3)], 'o-','color',Color.Contra , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1],'LineWidth', LineWith); hold on;
 
     plot([pFA(3)], [pHit(3)], 'o','color',Color.Contra , 'MarkerSize',MarkSize-1,'markerfacecolor',Color.Contra,'LineWidth', LineWith); hold on;
-  %  legend('con pre', 'ipsi pre', 'con pst', 'ipsi pst','Location','NorthEast')
 
     set(gca,'ylim',[0 1],'xlim',[0 1],'fontsize',fs)
     xlabel( 'False Alarm rate','fontsize',fs,'fontweight','b', 'Interpreter', 'none' );
@@ -820,7 +823,6 @@ scatter(pFAR_S,pHR_S,60,criterion_S, 'filled'); hold on;
     xlabel('Sensitivity','fontsize',fs,'fontweight','b', 'Interpreter', 'none')
     ylabel('Criterion','fontsize',fs,'fontweight','b', 'Interpreter', 'none')
     set(gca,'ylim',[-2 2],'xlim',[-1 4] ,'fontsize',fs)
-    %legend('ipsi Ctr', 'ipsi Ina', 'con Ctr', 'con Ina','Location','NorthEast')
     text(-0.5,-1.8, 'More Contra', 'Color', 'k' ,'fontsize',20)
     text(-0.5,1.8, 'Less Contra', 'Color', 'k' ,'fontsize',20)
     
@@ -882,9 +884,9 @@ scatter(pFAR_S,pHR_S,60,criterion_S, 'filled'); hold on;
 %         
 if SaveGraph
     h = figure(4);
-    print(h,['Y:\Projects\Pulv_distractor_spatial_choice\SDT\SimulationsPredictions' ,filesep,'png',filesep, NameScenario, 'F2.png'], '-dpng')
+    print(h,['Y:\Projects\Pulv_distractor_spatial_choice\Inactivation\SimulationsPredictions' ,filesep,'png',filesep, NameScenario, 'F2.png'], '-dpng')
     set(h,'PaperPositionMode','auto')
-    compl_filename =  ['Y:\Projects\Pulv_distractor_spatial_choice\SDT\SimulationsPredictions' ,filesep,'ai', filesep, NameScenario, 'F2.ai'] ;
+    compl_filename =  ['Y:\Projects\Pulv_distractor_spatial_choice\Inactivation\SimulationsPredictions' ,filesep,'ai', filesep, NameScenario, 'F2.ai'] ;
     print(h,'-depsc',compl_filename);
     %close all;
 end

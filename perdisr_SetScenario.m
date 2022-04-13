@@ -1,4 +1,4 @@
-function [ H, M, FA, CR , Sensitvity_Change, StimulusType] = SetScenario( NameScenario )
+function [ H, M, FA, CR , Sensitvity_Change, StimulusType] = perdisr_SetScenario( NameScenario )
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 
