@@ -1,4 +1,4 @@
-function [d,beta,c] = perdis_dprime(pHit,pFA)
+function [d,beta,c] = perdis_Cal_SDTvariables(pHit,pFA)
 % pHit	- hit probability
 % pFA	- probability of False Alarms
 % http://en.wikipedia.org/wiki/D%27
