@@ -1,4 +1,4 @@
-function [ H, M, FA, CR , Sensitvity_Change, StimulusType] = SetScenario_ForDPulvInacManuscript( NameScenario )
+function [ H, M, FA, CR , Sensitvity_Change, StimulusType] = perdisr_SetScenario_ForDPulvInacManuscript( NameScenario )
 % Which secenario you want to run? 
 
 %% Overview of all included Scenarios %%
@@ -21,6 +21,11 @@ function [ H, M, FA, CR , Sensitvity_Change, StimulusType] = SetScenario_ForDPul
 % scenario = '2HF_DoubleD-Tstimuli_EasyDistr_Post_ipsiSpatialBias_Vers2_LessFixation'; %(Presentation)
 % scenario = '2HF_DoubleD-Tstimuli_DiffDistr_Post_ipsiSpatialBias_Vers1_LessSaccadesContra'; %(Presentation)
  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Legend
+%       contra | ispi
+% pre     1       2
+% post    3       4
 
 switch NameScenario
    
