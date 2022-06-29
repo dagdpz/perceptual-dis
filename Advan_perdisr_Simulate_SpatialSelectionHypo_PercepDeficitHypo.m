@@ -1,4 +1,4 @@
- function perdisr_Simulate_SpatialSelectionHypo_PercepDeficitHypo(NameScenario)
+ function Advan_perdisr_Simulate_SpatialSelectionHypo_PercepDeficitHypo(NameScenario)
 % perdisr_Simulate_SpatialSelectionHypo_PercepDeficitHypo - simulates data
 % according to the assumptions of the Spatial selection bias hypotheses and
 % perceptual discrimination hypiotheses

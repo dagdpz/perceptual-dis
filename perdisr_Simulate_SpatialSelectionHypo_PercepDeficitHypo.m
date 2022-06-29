@@ -424,7 +424,7 @@ scatter(pFAR_S,pHR_S,60,criterion_S, 'filled'); hold on;
 %% Additional Plots
 Plot_Rows = 2;
 Plot_Colums = 3;
-MarkSize = 10;
+MarkSize = 15;
 fs = 10; % font size
 
 

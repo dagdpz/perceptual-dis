@@ -233,15 +233,15 @@ switch NameScenario
         sb = 0.19;
         % contra post
         H(3)   = H(1)- sb ; %less saccades to contra
-        M(3)   = M(1);
+        M(3)   = M(1) ;
         FA(3)  = FA(1)- sb; %less saccades to contra
-        CR(3)  = CR(1) ;
+        CR(3)  = CR(1);
         
         % ispi post
-        H(4)   = H(2)+ sb ; %more saccades to ipsi
-        M(4)   = M(3);
-        FA(4)  = FA(2)+ sb;
-        CR(4)  = CR(3);
+        H(4)   = H(2)+ sb ;  %more saccades to ipsi
+        M(4)   = M(3)- (sb/5) ;
+        FA(4)  = FA(2)+ sb ;
+        CR(4)  = CR(3)- (sb/5) ;
 
     case 'DoubleSameStimuli_DiffDiscr_Post_ContraPerceptualDeficit';
         disp('Double Stimuli - Post: contra perceptual deficit')
@@ -265,14 +265,14 @@ switch NameScenario
         sb = 0.2;
         % contra post
         H(3)   = H(1)- sb ;
-        M(3)   = M(1); %contra fixation
+        M(3)   = M(1)+ sb; %contra fixation
         FA(3)  = FA(1)+ sb;%contra Saccade
-        CR(3)  = CR(1); %- sb;
+        CR(3)  = CR(1)- sb; %- sb;
         
         % ispi post
-        H(4)   = H(2)+ sb; %- (sb/5) ; %visual display changes
+        H(4)   = H(2); %- (sb/5) ; %visual display changes
         M(4)   = M(3); %+ (sb/5); %visual display changes
-        FA(4)  = FA(2)- sb;  %- (sb/5); %visual display changes
+        FA(4)  = FA(2);  %- (sb/5); %visual display changes
         CR(4)  = CR(3); %+ (sb/5); %visual display changes
         
         
