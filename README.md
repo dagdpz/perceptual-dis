@@ -8,17 +8,15 @@ The simulation is implemented in MATLAB and utilizes Ig_tools. The purpose of th
 visualize the change related to different szenarios (Single Stimuli, Double Same and Double Different Stimuli) for the two hypothesis. 
 
 ## Installation
-To run  this stimulation, you will need to install the MATLAB! I tested it with MATLAB 2014b & 2021
+To run  this stimulation, you will need to install the MATLAB! I tested it with MATLAB 2014b
 1. Clone this repository: https://github.com/dagdpz/perceptual-dis
 2. Install the required dependencies
 	- https://github.com/igorkagan/Igtools 
 
-
-
 ## Usage
 ``` 
 path_toGitHub = ''; 
-cd [path_toGitHub , filesep, perceptual-dis repository]
+cd path_tothe Repository 
 addpath([path_toGitHub , filesep, 'Igtools']) # needs: ig_figure & ig_figurename
 addpath([path_toGitHub , filesep, 'Igtools\external\cbrewer']) # external function cbrewer
 perdisr_Simulate_SpatialSelectionHypo_PercepDeficitHypo('Fig4A_SingleStimuli_DifficultDistr_SelectionBiasHypothesis('')
