@@ -8,7 +8,7 @@ function [ H, M, FA, CR , Sensitvity_Change, StimulusType] = perdis_SetScenario_
 
 %%%%%%% 2 Hemifields: DOUBLE SAME STIMULI  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % NameScenario = 'Fig5A_DoubleSameStimuli_DiffDistr_SelectionBiasHypothesis';
-% NameScenario = 'Fig5A_DoubleSameStimuli_DiffDistr_ContraPerceptualDeficitHypothesis';
+% NameScenario = 'Fig5A_DoubleSameStimuli_DiffDistr_ContraPerceptualDeficitHypothesis_V1';
 % NameScenario = 'Fig5B_DoubleSameStimuli_EasyDistr_SelectionBiasHypothesis'; 
 % NameScenario = 'Fig5B_DoubleSameStimuli_EasyDistr_ContraPerceptualDeficitHypothesis';
 
@@ -199,6 +199,38 @@ switch NameScenario
         FA(4)  = FA(2)+ sb ;
         CR(4)  = CR(3)- (sb/5) ;
 
+     case 'Fig5A_DoubleSameStimuli_DiffDistr_ContraPerceptualDeficitHypothesis_V1';
+        disp('Fig5A_DoubleSameStimuli_DiffDistr_ContraPerceptualDeficitHypothesis_V1')
+        StimulusType = 'DoubleSameStimuli';
+        Sensitvity_Change = 1; 
+        % perceptual deficit: increasing errors
+        %
+        % contra pre
+        H(1)   = 0.49;
+        M(1)   = 0.01;
+        FA(1)  = 0.35;
+        CR(1)  = 0.4;
+        
+        % ipsi pre
+        H(2)   = 0.50;
+        M(2)   = M(1);
+        FA(2)  = 0.25;
+        CR(2)  = CR(1);
+        
+        
+        sb = 0.2;
+        % contra post
+        H(3)   = H(1)- sb ;
+        M(3)   = M(1)+ sb; %contra fixation
+        FA(3)  = FA(1)+ sb;%contra Saccade
+        CR(3)  = CR(1)- sb; %- sb;
+        
+        % ispi post
+        H(4)   = H(2); %- (sb/5) ; %visual display changes
+        M(4)   = M(3); %+ (sb/5); %visual display changes
+        FA(4)  = FA(2);  %- (sb/5); %visual display changes
+        CR(4)  = CR(3); %+ (sb/5); %visual display changes
+        
     case 'Fig5A_DoubleSameStimuli_DiffDistr_ContraPerceptualDeficitHypothesis';
         disp('Fig5A_DoubleSameStimuli_DiffDistr_ContraPerceptualDeficitHypothesis')
         StimulusType = 'DoubleSameStimuli';
@@ -231,10 +263,10 @@ switch NameScenario
         CR(4)  = CR(3)+ (sb/5);
         
         
-    case 'Fig5B_DoubleSameStimuli_EasyDistr_SelectionBiasHypothesis';
-        disp('Fig5B_DoubleSameStimuli_EasyDistr_SelectionBiasHypothesis')
+    case 'Fig5B_DoubleSameStimuli_EasyDistr_ContraPerceptualDeficitHypothesis';
+        disp('Fig5B_DoubleSameStimuli_EasyDistr_ContraPerceptualDeficitHypothesis')
         StimulusType = 'DoubleSameStimuli';
-        Sensitvity_Change = 0; 
+        Sensitvity_Change = 1; 
         % contra pre
         H(1)   = 0.45; %0.45;
         M(1)   = 0.01;
@@ -260,35 +292,37 @@ switch NameScenario
         FA(4)  = FA(2)+ (sb/5); 
         CR(4)  = CR(3)- (sb/5);
         
-    case 'Fig5B_DoubleSameStimuli_EasyDistr_ContraPerceptualDeficitHypothesis';
-        disp('Fig5B_DoubleSameStimuli_EasyDistr_ContraPerceptualDeficitHypothesis')
-        StimulusType = 'DoubleSameStimuli';
-        Sensitvity_Change = 1; 
         
+         case 'Fig5B_DoubleSameStimuli_EasyDistr_SelectionBiasHypothesis';
+        disp('Fig5B_DoubleSameStimuli_EasyDistr_SelectionBiasHypothesis')
+        StimulusType = 'DoubleSameStimuli';
+        Sensitvity_Change = 0; 
+
         % contra pre
-        H(1)   = 0.5;
-        M(1)   = 0.2;
-        FA(1)  = 0.1; %0.1;
-        CR(1)  = 0.5; %0.6;
+        H(1)   = 0.45; %0.45;
+        M(1)   = 0.01;
+        FA(1)  = 0.01;
+        CR(1)  = 0.94;
         
         % ipsi pre
-        H(2)   = 0.3;
+        H(2)   = 0.54;
         M(2)   = M(1);
-        FA(2)  = 0.4;
+        FA(2)  = 0.05;
         CR(2)  = CR(1);
         
-        sb = 0.1;
+        sb = 0.27;
         % contra post
-        H(3)   = H(1)- sb ;
-        M(3)   = M(1)+ sb;
-        FA(3)  = FA(1)+sb;
-        CR(3)  = CR(1)- sb;
+        H(3)   = H(1)- sb ; %less saccades to contra
+        M(3)   = M(1);
+        FA(3)  = FA(1); %less saccades to contra
+        CR(3)  = CR(1) ;
         
         % ispi post
-        H(4)   = H(2) ;
+        H(4)   = H(2)+ sb ; %more saccades to ipsi
         M(4)   = M(3);
         FA(4)  = FA(2);
         CR(4)  = CR(3);
+ 
         
         
         
