@@ -19,7 +19,7 @@ path_toGitHub = '';
 cd path_tothe Repository 
 addpath([path_toGitHub , filesep, 'Igtools']) # needs: ig_figure & ig_figurename
 addpath([path_toGitHub , filesep, 'Igtools\external\cbrewer']) # external function cbrewer
-perdisr_Simulate_SpatialSelectionHypo_PercepDeficitHypo('Fig4A_SingleStimuli_DifficultDistr_SelectionBiasHypothesis('')
+perdisr_Simulate_SpatialSelectionHypo_PercepDeficitHypo('Fig4A_SingleStimuli_DifficultDistr_SelectionBiasHypothesis')
 ```
 ## Results
 Figure 1: the figure of the manuscript
@@ -27,4 +27,4 @@ Figure 2: Additional plots for the changes in hitrate and false alarm for before
 Figure 3: Additional plots with showing the distribution of values of the criterion, dprime and accuarcy
 
 ## Acknowledgement
- Thanks to Charles Robert who provided the function cbrewer (license included in the folder)
+Thanks to Charles Robert who provided the function cbrewer (license included in the folder)
