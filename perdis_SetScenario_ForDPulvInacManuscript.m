@@ -1,5 +1,5 @@
 function [ H, M, FA, CR , Sensitvity_Change, StimulusType] = perdis_SetScenario_ForDPulvInacManuscript( NameScenario )
-%% Which secenario you want to run? - Overview of all included Scenarios %%
+%% Which scenario you want to run? - Overview of all included Scenarios %%
 %%%%%%% Single STIMULI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % NameScenario = 'Fig4A_SingleStimuli_DifficultDistr_SelectionBiasHypothesis';  
 % NameScenario = 'Fig4A_SingleStimuli_DifficultDistr_ContraPerceptualDeficitHypothesis';

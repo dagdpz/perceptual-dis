@@ -221,7 +221,6 @@ for k = 1:4
 end
 
 
-
 %% computations for the relationship between hitrate/false alarm rate for sensitivity, criterion and accuracy
 step = 0.01;
 cmb  = ig_nchoosek_with_rep_perm([0:step:1],2); %combvec([0:step:1],[0:step:1]); %
@@ -275,6 +274,7 @@ set(gca,'ylim',[0 1],'xlim',[0 1],'fontsize',fs)
 xlabel( 'False Alarm rate','fontsize',fs,'fontweight','b', 'Interpreter', 'none' );
 ylabel( 'Hit rate','fontsize',fs,'fontweight','b', 'Interpreter', 'none' );
 axis square
+
 
 
 subplot(Plot_Rows,Plot_Colums,2);
