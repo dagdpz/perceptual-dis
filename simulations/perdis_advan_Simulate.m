@@ -1,13 +1,12 @@
- function Advan_perdisr_Simulate_SpatialSelectionHypo_PercepDeficitHypo(NameScenario)
-% perdisr_Simulate_SpatialSelectionHypo_PercepDeficitHypo - simulates data
-% according to the assumptions of the Spatial selection bias hypotheses and
-% perceptual discrimination hypiotheses
- 
-% USAGE: 
-% perdisr_Simulate_SpatialSelectionHypo_PercepDeficitHypo('SingleStimuli_DifficultDistr_Post_NoGoBias') 
+function perdis_advan_Simulate(NameScenario)
+% perdis_advan_Simulate - simulates data according to the assumptions of the 
+% spatial selection bias hypotheses and perceptual discrimination hypiotheses
 
-%INPUTS: 
-% Name of the simulated Scenario (all predifined scenarios can be found in perdisr_SetScenario_ForDPulvInacManuscript
+% USAGE:
+% perdis_advan_Simulate('SingleStimuli_DifficultDistr_Post_NoGoBias'); % SingleStimuli_DifficultDistr_Post_NoGoBias is not in perdis_SetScenario!!!  
+
+% INPUTS:
+% Name of the simulated Scenario (all predifined scenarios can be found in perdis_SetScenario)
 
 % REQUIRES: Igtools
 
@@ -15,27 +14,26 @@
 % Dprime, False alarm rate, Hit rate, response criterion, accuracy, spatial selections
 % Author(s):  K.Kaduk & I.Kagan, DAG, DPZ
 % URL:		http://www.dpz.eu/dag
-%%
-% remove all additional features
-% remove the save option
 
-%
+
+%%
 close all;
-warning off; 
+warning off;
 
 %% Plotting parameters
 plot_mainExpectations = 1;
 SaveGraph = 1;
+
 % Colors for Plotting
-Color.Ipsi = [0 0 1 ]; 
-Color.Contra = [1 0 1 ]; 
+Color.Ipsi = [0 0 1 ];
+Color.Contra = [1 0 1 ];
 
 
-%% 
+%%
 IndependentCalculation = 0; % for double stimuli, using all three outcomes (dependent) or only two out of three (independent for contra/ipsi)
 n_trials = 100; % for each stimulus condition
-% 
-[ H, M, FA, CR , Dprime_Change, StimulusType] = perdisr_SetScenario_ForDPulvInacManuscript( NameScenario ); 
+%
+[ H, M, FA, CR , Dprime_Change, StimulusType] = perdis_SetScenario( NameScenario );
 
 % Enter Proportion for Hits, Misses, FA, CR
 H   = single(H*n_trials);
@@ -167,8 +165,8 @@ switch StimulusType
         %TargetSelection
         Tar_IpsiSelection(1)    = H(2) ./ (FA(1) + H(2) + M(1)); %ipsi
         Tar_ContraSelection(1)  = H(1) ./ (H(1) + FA(2) + M(1));
-        Tar_IpsiFixation(1)     = M(2) ./ (FA(1) + H(2) + M(2)); 
-        Tar_ContraFixation(1)   = M(1) ./ (FA(2) + H(1) + M(1)); 
+        Tar_IpsiFixation(1)     = M(2) ./ (FA(1) + H(2) + M(2));
+        Tar_ContraFixation(1)   = M(1) ./ (FA(2) + H(1) + M(1));
         Tar_IpsiSelection(2)    = H(4) ./ (FA(3) + H(4) + M(3));
         Tar_ContraSelection(2)  = H(3) ./ (H(3) + FA(4) + M(3));
         Tar_IpsiFixation(2)     = M(4) ./ (FA(3) + H(4) + M(4));
@@ -184,9 +182,9 @@ switch StimulusType
         Dis_IpsiFixation(2)     = CR(4) ./ (H(3) + FA(4) + CR(4));
         Dis_ContraFixation(2)   = CR(3) ./ (H(4) + FA(3) + CR(3));
         
-
+        
     case '1HF_DoubleSameStimuli'
-         if H(1)+ M(1) == 100 &&  CR(1)+ FA(1) == 100
+        if H(1)+ M(1) == 100 &&  CR(1)+ FA(1) == 100
             disp('Pre: target-trials: add up to 100')
         else
             disp('Pre: target-trials: DO NOT add up to 100')
@@ -217,8 +215,8 @@ switch StimulusType
         %TargetSelection
         Tar_IpsiSelection(1)    = H(2) ./ (FA(2) + H(2) + M(2)); %ipsi
         Tar_ContraSelection(1)  = H(1) ./ (H(1) + FA(1) + M(1));
-        Tar_IpsiFixation(1)     = M(2) ./ (FA(2) + H(2) + M(2)); 
-        Tar_ContraFixation(1)   = M(1) ./ (FA(1) + H(1) + M(1)); 
+        Tar_IpsiFixation(1)     = M(2) ./ (FA(2) + H(2) + M(2));
+        Tar_ContraFixation(1)   = M(1) ./ (FA(1) + H(1) + M(1));
         Tar_IpsiSelection(2)    = H(4) ./ (FA(4) + H(4) + M(4));
         Tar_ContraSelection(2)  = H(3) ./ (H(3) + FA(3) + M(3));
         Tar_IpsiFixation(2)     = M(4) ./ (FA(4) + H(4) + M(4));
@@ -234,7 +232,7 @@ switch StimulusType
         Dis_IpsiFixation(2)     = CR(4) ./ (H(4) + FA(4) + CR(4));
         Dis_ContraFixation(2)   = CR(3) ./ (H(3) + FA(3) + CR(3));
     case '1HF_TarDistStimuli'
-         if H(1)+ M(1)+ FA(1) == 100 && H(2)+ M(2)+ FA(2) == 100
+        if H(1)+ M(1)+ FA(1) == 100 && H(2)+ M(2)+ FA(2) == 100
             disp('Pre: target-trials: add up to 100')
         else
             disp('Pre: target-trials: DO NOT add up to 100')
@@ -263,16 +261,16 @@ switch StimulusType
         Accuracy_contra(1) = (H(1))/(H(1) + H(2) + M(1) +  FA(1)+ CR(1)+ FA(2));
         Accuracy_contra(2) = (H(3))/(H(3) + H(4) + M(3) +  FA(3)+ CR(3)+ FA(4));
         %TargetSelection
-        Tar_IpsiSelection(1)    = H(2) ./ (FA(2) + H(2) + M(2)); 
+        Tar_IpsiSelection(1)    = H(2) ./ (FA(2) + H(2) + M(2));
         Tar_ContraSelection(1)  = H(1) ./ (H(1) + FA(1) + M(1));
-        Tar_IpsiFixation(1)     = M(2) ./ (FA(2) + H(2) + M(2)); 
-        Tar_ContraFixation(1)   = M(1) ./ (FA(1) + H(1) + M(1)); 
+        Tar_IpsiFixation(1)     = M(2) ./ (FA(2) + H(2) + M(2));
+        Tar_ContraFixation(1)   = M(1) ./ (FA(1) + H(1) + M(1));
         Tar_IpsiSelection(2)    = H(4) ./ (FA(4) + H(4) + M(4));
         Tar_ContraSelection(2)  = H(3) ./ (H(3) + FA(3) + M(3));
         Tar_IpsiFixation(2)     = M(4) ./ (FA(4) + H(4) + M(4));
         Tar_ContraFixation(2)   = M(3) ./ (FA(3) + H(3) + M(3));
         %DistractorSelection
-        Dis_IpsiSelection(1)    = FA(2) ./ (H(2) + FA(2) + CR(2)); 
+        Dis_IpsiSelection(1)    = FA(2) ./ (H(2) + FA(2) + CR(2));
         Dis_ContraSelection(1)  = FA(1) ./ (FA(1) + H(1) + CR(1));
         Dis_IpsiFixation(1)     = CR(2) ./ (H(2) + FA(2) + CR(2));
         Dis_ContraFixation(1)   = CR(1) ./ (H(1) + FA(1) + CR(1));
@@ -305,9 +303,9 @@ if IndependentCalculation == 1
 else
     %different proprotions of trials for hitrate & falsealarm dependent on type of Stimuli
     if strcmp(StimulusType , 'Sgl_Stimuli')
-    pHit = H ./ (H + M);
-    pFA = FA ./ (FA + CR);
-           
+        pHit = H ./ (H + M);
+        pFA = FA ./ (FA + CR);
+        
     elseif strcmp(StimulusType , 'DoubleSameStimuli')
         
         H_ = [H(2) H(1) H(4) H(3) ];
@@ -315,7 +313,7 @@ else
         pHit = H ./ (H + M +H_);
         pFA = FA ./ (FA + CR +FA_);
         
-
+        
     elseif strcmp(StimulusType , 'Double D-T Stimuli')
         %change the order of the Hits because
         % example: H (contra) ./ (H(contra) + M(contra) +FA(ipsi));
@@ -323,10 +321,10 @@ else
         FA_ = [FA(2) FA(1) FA(4) FA(3) ];
         pHit = H ./ (H + M +FA_);
         pFA = FA ./ (FA + CR +H_);
-     elseif strcmp(StimulusType , '1HF_TarDistStimuli')    
+    elseif strcmp(StimulusType , '1HF_TarDistStimuli')
         pHit = H ./ (H + M +FA);
         pFA = FA ./ (FA + CR +H);
-     elseif strcmp(StimulusType , '1HF_DoubleSameStimuli')    
+    elseif strcmp(StimulusType , '1HF_DoubleSameStimuli')
         pHit = H ./ (H + M );
         pFA = FA ./ (FA + CR );
     end
@@ -493,12 +491,12 @@ subplot(Plot_Colums,Plot_Rows,9);
 % grid on
 
 % Selection Bias
-diff_criterion(1) = ((criterion(1)+ (-1*criterion(2)))/2); 
-diff_criterion(2) = ((criterion(3)+ (-1*criterion(4)))/2); 
+diff_criterion(1) = ((criterion(1)+ (-1*criterion(2)))/2);
+diff_criterion(2) = ((criterion(3)+ (-1*criterion(4)))/2);
 
- plot(SelectionBias(1),diff_criterion(1), 'o','color',[0 0 0] , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1 ]); hold on;
- plot(SelectionBias(2),diff_criterion(2), 'o','color',[0 0 0] , 'MarkerSize',MarkSize,'markerfacecolor',[0 0 0 ]); hold on;
- plot(SelectionBias,diff_criterion, '-','color',[0 0 0] , 'MarkerSize',MarkSize,'markerfacecolor',[0 0 0 ]); hold on;
+plot(SelectionBias(1),diff_criterion(1), 'o','color',[0 0 0] , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1 ]); hold on;
+plot(SelectionBias(2),diff_criterion(2), 'o','color',[0 0 0] , 'MarkerSize',MarkSize,'markerfacecolor',[0 0 0 ]); hold on;
+plot(SelectionBias,diff_criterion, '-','color',[0 0 0] , 'MarkerSize',MarkSize,'markerfacecolor',[0 0 0 ]); hold on;
 
 
 plot(SelectionBias(1), criterion(1), 'o','color',[1 0 1] , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1 ]); hold on;
@@ -520,7 +518,7 @@ grid on
 %% PLOT properties
 MarkSize = 15;
 fs = 25; % font size
-LineWith = 3; 
+LineWith = 3;
 
 %% the relationship between hitrate/false alarm rate with sensitivity, criterion and accuracy
 
@@ -532,8 +530,8 @@ pFAR_S = cmb(:,2);
 
 for k = 1:length(cmb(:,1)),
     [dprime_S(k),beta_S(k),criterion_S(k)] = testsim_dprime(pHR_S(k),pFAR_S(k));
-    Accuracy_S(k) = (pHR_S(k) + (1-pFAR_S(k))) /2; 
- end
+    Accuracy_S(k) = (pHR_S(k) + (1-pFAR_S(k))) /2;
+end
 idx = find(dprime_S == Inf | dprime_S == -Inf | isnan(dprime_S));
 dprime_S(idx)   =[];
 pFAR_S(idx)     =[];
@@ -614,10 +612,10 @@ scatter(dprime_S,criterion_S,60,Accuracy_S, 'filled'); hold on;
 f = colorbar;
 f.Label.String = 'Accuracy';
 grid on;
-    plot([dprime(2), dprime(4)],[-criterion(2),-criterion(4)] , 'o-','color',Color.Ipsi , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1 ],'LineWidth', LineWith); hold on;% reverse direction of criterion for ipsi
-    plot(dprime(4),-criterion(4), 'o','color',Color.Ipsi ,'MarkerSize',MarkSize,'markerfacecolor',Color.Ipsi);% reverse direction of criterion for ipsi
-    plot([dprime(1), dprime(3)],[criterion(1),criterion(3)], 'o-','color',Color.Contra , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1 ],'LineWidth', LineWith); hold on; 
-    plot(dprime(3),criterion(3), 'o','color',Color.Contra ,'MarkerSize',MarkSize,'markerfacecolor',Color.Contra);
+plot([dprime(2), dprime(4)],[-criterion(2),-criterion(4)] , 'o-','color',Color.Ipsi , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1 ],'LineWidth', LineWith); hold on;% reverse direction of criterion for ipsi
+plot(dprime(4),-criterion(4), 'o','color',Color.Ipsi ,'MarkerSize',MarkSize,'markerfacecolor',Color.Ipsi);% reverse direction of criterion for ipsi
+plot([dprime(1), dprime(3)],[criterion(1),criterion(3)], 'o-','color',Color.Contra , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1 ],'LineWidth', LineWith); hold on;
+plot(dprime(3),criterion(3), 'o','color',Color.Contra ,'MarkerSize',MarkSize,'markerfacecolor',Color.Contra);
 
 set(gca,'xlim',[-5 5],'ylim',[-3 3],'fontsize',fs)
 xlabel( 'sensitivity','fontsize',fs,'fontweight','b', 'Interpreter', 'none' );
@@ -644,40 +642,40 @@ if plot_mainExpectations
         mult = -1;
     end
     ig_figure('Position',[200 200 1200 900],'PaperPositionMode','auto','Name',[Title, ' - scenario - ',NameScenario]); % ,'PaperOrientation','landscape'
-   
-    if strcmp(StimulusType , 'DoubleSameStimuli')
-    Plot_Colums = 4;
-    Plot_Rows = 2;
-    else
-    Plot_Colums = 4;
-    Plot_Rows = 1;
-    end
-
-    %Hit rate vs False alarm rate
-   a =  subplot(Plot_Rows,Plot_Colums,1);
-
-   if Dprime_Change
-scatter(pFAR_S,pHR_S,60,dprime_S, 'filled'); hold on;
-Settings.Graph.cmap = colormap( a, cbrewer('div', 'RdYlGn', 100)); %colormap(flip(linspecer));
-a = colorbar;
-a.Label.String = 'sensitivity';
     
-   elseif Dprime_Change == 0; 
-Settings.Graph.cmap = colormap(a,cbrewer( 'div', 'BrBG', 100)); %colormap(flip(linspecer));
-scatter(pFAR_S,pHR_S,60,criterion_S, 'filled'); hold on;
-a = colorbar;
-a.Label.String = 'criterion';
-   end
+    if strcmp(StimulusType , 'DoubleSameStimuli')
+        Plot_Colums = 4;
+        Plot_Rows = 2;
+    else
+        Plot_Colums = 4;
+        Plot_Rows = 1;
+    end
+    
+    %Hit rate vs False alarm rate
+    a =  subplot(Plot_Rows,Plot_Colums,1);
+    
+    if Dprime_Change
+        scatter(pFAR_S,pHR_S,60,dprime_S, 'filled'); hold on;
+        Settings.Graph.cmap = colormap( a, cbrewer('div', 'RdYlGn', 100)); %colormap(flip(linspecer));
+        a = colorbar;
+        a.Label.String = 'sensitivity';
+        
+    elseif Dprime_Change == 0;
+        Settings.Graph.cmap = colormap(a,cbrewer( 'div', 'BrBG', 100)); %colormap(flip(linspecer));
+        scatter(pFAR_S,pHR_S,60,criterion_S, 'filled'); hold on;
+        a = colorbar;
+        a.Label.String = 'criterion';
+    end
     
     plot([pFA(2),pFA(4)], [pHit(2),pHit(4)], 'o-','color',Color.Ipsi, 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1],'LineWidth', LineWith); hold on;
     plot([pFA(4)], [pHit(4)], 'o','color',Color.Ipsi , 'MarkerSize',MarkSize-1,'markerfacecolor',Color.Ipsi,'LineWidth', LineWith); hold on;
     line([0 1],[1 0],'Color',[0 0 0],'LineStyle',':');
-
+    
     plot([pFA(1),pFA(3)], [pHit(1),pHit(3)], 'o-','color',Color.Contra , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1],'LineWidth', LineWith); hold on;
-
+    
     plot([pFA(3)], [pHit(3)], 'o','color',Color.Contra , 'MarkerSize',MarkSize-1,'markerfacecolor',Color.Contra,'LineWidth', LineWith); hold on;
-  %  legend('con pre', 'ipsi pre', 'con pst', 'ipsi pst','Location','NorthEast')
-
+    %  legend('con pre', 'ipsi pre', 'con pst', 'ipsi pst','Location','NorthEast')
+    
     set(gca,'ylim',[0 1],'xlim',[0 1],'fontsize',fs)
     xlabel( 'FA rate','fontsize',fs,'fontweight','b', 'Interpreter', 'none' );
     ylabel( 'Hitrate','fontsize',fs,'fontweight','b', 'Interpreter', 'none' );
@@ -687,7 +685,7 @@ a.Label.String = 'criterion';
     subplot(Plot_Rows,Plot_Colums,2);
     plot([dprime(2), dprime(4)],[-criterion(2),-criterion(4)] , 'o-','color',Color.Ipsi , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1 ],'LineWidth', LineWith); hold on;% reverse direction of criterion for ipsi
     plot(dprime(4),-criterion(4), 'o','color',Color.Ipsi ,'MarkerSize',MarkSize,'markerfacecolor',Color.Ipsi);% reverse direction of criterion for ipsi
-
+    
     plot([dprime(1), dprime(3)],[criterion(1),criterion(3)], 'o-','color',Color.Contra , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1 ],'LineWidth', LineWith); hold on;
     
     plot(dprime(3),criterion(3), 'o','color',Color.Contra ,'MarkerSize',MarkSize,'markerfacecolor',Color.Contra);
@@ -715,11 +713,11 @@ a.Label.String = 'criterion';
     ylabel( 'Accuracy','fontsize',fs,'fontweight','b', 'Interpreter', 'none' );
     set(gca,'xlim',[0 3],'Xtick',1:2,'XTickLabel',{'pre' 'post'},'fontsize',fs);
     axis square
- 
+    
     subplot(Plot_Rows,Plot_Colums,4);
     plot([dprime(2);dprime(4)], [Accuracy_ipsi(1),Accuracy_ipsi(2)], 'o','color',Color.Ipsi , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1 ]); hold on;
     plot(dprime(4),Accuracy_ipsi(2), 'o','color',Color.Ipsi ,'MarkerSize',MarkSize,'markerfacecolor',Color.Ipsi);
-
+    
     plot([dprime(1);dprime(3)], [Accuracy_contra(1),Accuracy_contra(2)], 'o','color',Color.Contra , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1 ]); hold on;
     plot(dprime(3),Accuracy_contra(2), 'o','color',Color.Contra ,'MarkerSize',MarkSize,'markerfacecolor',Color.Contra);
     set(gca,'ylim',[0 1],'xlim',[-1 3] ,'fontsize',fs)
@@ -728,21 +726,21 @@ a.Label.String = 'criterion';
     xlabel('sensitivity','fontsize',fs,'fontweight','b', 'Interpreter', 'none')
     
     if strcmp(StimulusType , 'DoubleSameStimuli')
-    subplot(Plot_Rows,Plot_Colums,7);
-    plot([0.9;1.9], [Accuracy_ipsi_V2(1),Accuracy_ipsi_V2(2)], 'o-','color',Color.Ipsi , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1 ]); hold on;
-    plot([1.1;2.1], [Accuracy_contra_V2(1),Accuracy_contra_V2(2)], 'o-','color',Color.Contra , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1 ]); hold on;
-    plot([1;2], [Accuracy(1),Accuracy(2)], 'o-','color',[0 0 0] , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1 ],'LineWidth', LineWith); hold on;
-    
-    plot(2.1,Accuracy_contra_V2(2), 'o','color',Color.Contra ,'MarkerSize',MarkSize,'markerfacecolor',Color.Contra);
-    plot(1.9, Accuracy_ipsi_V2(2), 'o','color',Color.Ipsi ,'MarkerSize',MarkSize,'markerfacecolor',Color.Ipsi);% reverse direction of criterion for ipsi
-    plot(2,Accuracy(2), 'o','color',[0 0 0] ,'MarkerSize',MarkSize,'markerfacecolor',[0 0 0]);% reverse direction of criterion for ipsi
-    
-    set(gca,'ylim',[0 1])
-    ylabel( 'Accuracy','fontsize',fs,'fontweight','b', 'Interpreter', 'none' );
-    set(gca,'xlim',[0 3],'Xtick',1:2,'XTickLabel',{'pre' 'post'},'fontsize',fs);
-    axis square
-    
-    
+        subplot(Plot_Rows,Plot_Colums,7);
+        plot([0.9;1.9], [Accuracy_ipsi_V2(1),Accuracy_ipsi_V2(2)], 'o-','color',Color.Ipsi , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1 ]); hold on;
+        plot([1.1;2.1], [Accuracy_contra_V2(1),Accuracy_contra_V2(2)], 'o-','color',Color.Contra , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1 ]); hold on;
+        plot([1;2], [Accuracy(1),Accuracy(2)], 'o-','color',[0 0 0] , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1 ],'LineWidth', LineWith); hold on;
+        
+        plot(2.1,Accuracy_contra_V2(2), 'o','color',Color.Contra ,'MarkerSize',MarkSize,'markerfacecolor',Color.Contra);
+        plot(1.9, Accuracy_ipsi_V2(2), 'o','color',Color.Ipsi ,'MarkerSize',MarkSize,'markerfacecolor',Color.Ipsi);% reverse direction of criterion for ipsi
+        plot(2,Accuracy(2), 'o','color',[0 0 0] ,'MarkerSize',MarkSize,'markerfacecolor',[0 0 0]);% reverse direction of criterion for ipsi
+        
+        set(gca,'ylim',[0 1])
+        ylabel( 'Accuracy','fontsize',fs,'fontweight','b', 'Interpreter', 'none' );
+        set(gca,'xlim',[0 3],'Xtick',1:2,'XTickLabel',{'pre' 'post'},'fontsize',fs);
+        axis square
+        
+        
         subplot(Plot_Rows,Plot_Colums,8);
         plot([dprime(2);dprime(4)], [Accuracy_ipsi_V2(1),Accuracy_ipsi_V2(2)], 'o','color',Color.Ipsi , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1 ]); hold on;
         plot(dprime(4),Accuracy_ipsi_V2(2), 'o','color',Color.Ipsi ,'MarkerSize',MarkSize,'markerfacecolor',Color.Ipsi);
@@ -754,15 +752,15 @@ a.Label.String = 'criterion';
         axis square
         xlabel('sensitivity','fontsize',fs,'fontweight','b', 'Interpreter', 'none')
     end
-        
-if SaveGraph
-    h = figure(2);
-    print(h,['Y:\Projects\Pulv_distractor_spatial_choice\Inactivation\SimulationsPredictions' ,filesep,'png',filesep, NameScenario, '.png'], '-dpng')
-    set(h,'PaperPositionMode','auto')
-    compl_filename =  ['Y:\Projects\Pulv_distractor_spatial_choice\Inactivation\SimulationsPredictions' ,filesep,'ai', filesep, NameScenario, '.ai'] ;
-    print(h,'-depsc',compl_filename);
-    %close all;
-end
+    
+    if SaveGraph
+        h = figure(2);
+        print(h,['Y:\Projects\Pulv_distractor_spatial_choice\Inactivation\SimulationsPredictions' ,filesep,'png',filesep, NameScenario, '.png'], '-dpng')
+        set(h,'PaperPositionMode','auto')
+        compl_filename =  ['Y:\Projects\Pulv_distractor_spatial_choice\Inactivation\SimulationsPredictions' ,filesep,'ai', filesep, NameScenario, '.ai'] ;
+        print(h,'-depsc',compl_filename);
+        %close all;
+    end
 end
 
 
@@ -778,41 +776,41 @@ if plot_mainExpectations
         mult = -1;
     end
     ig_figure('Position',[200 200 1200 900],'PaperPositionMode','auto','Name',[Title, ' - scenario - ',NameScenario]); % ,'PaperOrientation','landscape'
-   
+    
     
     Plot_Colums = 3;
     Plot_Rows = 1;
     if strcmp(StimulusType , 'DoubleSameStimuli')
-    Plot_Colums = 4;
-    Plot_Rows = 2;
+        Plot_Colums = 4;
+        Plot_Rows = 2;
     else
-    Plot_Colums = 3;
-    Plot_Rows = 1;
+        Plot_Colums = 3;
+        Plot_Rows = 1;
     end
-
-    %Hit rate vs False alarm rate
-   a =  subplot(Plot_Rows,Plot_Colums,1);
-
-   if Dprime_Change
-Settings.Graph.cmap = colormap( a, cbrewer('div', 'RdYlGn', 100)); %colormap(flip(linspecer));
-scatter(pFAR_S,pHR_S,60,dprime_S, 'filled'); hold on;
-
-
     
-   elseif Dprime_Change == 0; 
-Settings.Graph.cmap = colormap(a,cbrewer( 'div', 'BrBG', 100)); %colormap(flip(linspecer));
-scatter(pFAR_S,pHR_S,60,criterion_S, 'filled'); hold on;
-
-   end
+    %Hit rate vs False alarm rate
+    a =  subplot(Plot_Rows,Plot_Colums,1);
+    
+    if Dprime_Change
+        Settings.Graph.cmap = colormap( a, cbrewer('div', 'RdYlGn', 100)); %colormap(flip(linspecer));
+        scatter(pFAR_S,pHR_S,60,dprime_S, 'filled'); hold on;
+        
+        
+        
+    elseif Dprime_Change == 0;
+        Settings.Graph.cmap = colormap(a,cbrewer( 'div', 'BrBG', 100)); %colormap(flip(linspecer));
+        scatter(pFAR_S,pHR_S,60,criterion_S, 'filled'); hold on;
+        
+    end
     
     plot([pFA(2),pFA(4)], [pHit(2),pHit(4)], 'o-','color',Color.Ipsi, 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1],'LineWidth', LineWith); hold on;
     plot([pFA(4)], [pHit(4)], 'o','color',Color.Ipsi , 'MarkerSize',MarkSize-1,'markerfacecolor',Color.Ipsi,'LineWidth', LineWith); hold on;
     line([0 1],[1 0],'Color',[0 0 0],'LineStyle',':');
-
+    
     plot([pFA(1),pFA(3)], [pHit(1),pHit(3)], 'o-','color',Color.Contra , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1],'LineWidth', LineWith); hold on;
-
+    
     plot([pFA(3)], [pHit(3)], 'o','color',Color.Contra , 'MarkerSize',MarkSize-1,'markerfacecolor',Color.Contra,'LineWidth', LineWith); hold on;
-
+    
     set(gca,'ylim',[0 1],'xlim',[0 1],'fontsize',fs)
     xlabel( 'False Alarm rate','fontsize',fs,'fontweight','b', 'Interpreter', 'none' );
     ylabel( 'Hit rate','fontsize',fs,'fontweight','b', 'Interpreter', 'none' );
@@ -822,7 +820,7 @@ scatter(pFAR_S,pHR_S,60,criterion_S, 'filled'); hold on;
     subplot(Plot_Rows,Plot_Colums,2);
     plot([dprime(2), dprime(4)],[-criterion(2),-criterion(4)] , 'o-','color',Color.Ipsi , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1 ],'LineWidth', LineWith); hold on;% reverse direction of criterion for ipsi
     plot(dprime(4),-criterion(4), 'o','color',Color.Ipsi ,'MarkerSize',MarkSize,'markerfacecolor',Color.Ipsi);% reverse direction of criterion for ipsi
-
+    
     plot([dprime(1), dprime(3)],[criterion(1),criterion(3)], 'o-','color',Color.Contra , 'MarkerSize',MarkSize,'markerfacecolor',[1 1 1 ],'LineWidth', LineWith); hold on;
     
     plot(dprime(3),criterion(3), 'o','color',Color.Contra ,'MarkerSize',MarkSize,'markerfacecolor',Color.Contra);
@@ -832,12 +830,12 @@ scatter(pFAR_S,pHR_S,60,criterion_S, 'filled'); hold on;
     set(gca,'ylim',[-2 2],'xlim',[-1 4] ,'fontsize',fs)
     text(-0.5,-1.8, 'More Contra', 'Color', 'k' ,'fontsize',20)
     text(-0.5,1.8, 'Less Contra', 'Color', 'k' ,'fontsize',20)
-if SaveGraph
-    h = figure(4);
-    print(h,['Y:\Projects\Pulv_distractor_spatial_choice\Inactivation\SimulationsPredictions' ,filesep,'png',filesep, NameScenario, 'F2.png'], '-dpng')
-    set(h,'PaperPositionMode','auto')
-    compl_filename =  ['Y:\Projects\Pulv_distractor_spatial_choice\Inactivation\SimulationsPredictions' ,filesep,'ai', filesep, NameScenario, 'F2.ai'] ;
-    print(h,'-depsc',compl_filename);
-    %close all;
-end
+    if SaveGraph
+        h = figure(4);
+        print(h,['Y:\Projects\Pulv_distractor_spatial_choice\Inactivation\SimulationsPredictions' ,filesep,'png',filesep, NameScenario, 'F2.png'], '-dpng')
+        set(h,'PaperPositionMode','auto')
+        compl_filename =  ['Y:\Projects\Pulv_distractor_spatial_choice\Inactivation\SimulationsPredictions' ,filesep,'ai', filesep, NameScenario, 'F2.ai'] ;
+        print(h,'-depsc',compl_filename);
+        %close all;
+    end
 end

@@ -1,31 +1,29 @@
-function perdis_Simulate_SpatialSelectionHypo_PercepDeficitHypo(NameScenario)
-% Read the README for Installation, Usage, Results
-
-% perdis_Simulate_SpatialSelectionHypo_PercepDeficitHypo - simulates data
-% according to the assumptions of the Spatial selection bias hypothesis or
+function perdis_Simulate(NameScenario)
+% perdis_Simulate - simulates data
+% according to the assumptions of the spatial selection bias hypothesis or
 % perceptual discrimination hypiothesis
 
-%USAGE:
-% perdis_Simulate_SpatialSelectionHypo_PercepDeficitHypo('Fig4A_SingleStimuli_DifficultDistr_SelectionBiasHypothesis')
+% USAGE:
+% perdis_Simulate('Fig4A_SingleStimuli_DifficultDistr_SelectionBiasHypothesis')
 
-%INPUTS:
-% Name of the simulated Scenario (all predefined scenarios can be found in perdis_SetScenario_ForDPulvInacManuscript
+% INPUTS:
+% Name of the simulated Scenario (all predefined scenarios can be found in perdis_SetScenario)
 
-%REQUIRES:
+% REQUIRES:
 % Igtools
 
-%OUTPUTS:
+% OUTPUTS:
 % Dprime, False alarm rate, Hit rate, response criterion, accuracy, spatial selections
 
-%Author(s):  K.Kaduk & I.Kagan, DAG, DPZ
-%URL:		http://www.dpz.eu/dag
+% Author(s):  K.Kaduk & I.Kagan, DAG, DPZ
+% http://www.dpz.eu/dag
 
 
 close all;
 warning off;
 
 % Proportion for Hits, Misses, FA, CR according to the scenario
-[ H, M, FA, CR , Dprime_Change, StimulusType] = perdis_SetScenario_ForDPulvInacManuscript( NameScenario );
+[ H, M, FA, CR , Dprime_Change, StimulusType] = perdis_SetScenario( NameScenario );
 
 n_trials = 100;
 
@@ -257,10 +255,10 @@ LineWith = 3;
 a =  subplot(Plot_Rows,Plot_Colums,1);
 
 if Dprime_Change
-    Settings.Graph.cmap = colormap( a, cbrewer('div', 'RdYlGn', 100)); %colormap(flip(linspecer));
+    Settings.Graph.cmap = colormap(a, cbrewer('div', 'RdYlGn', 100)); %colormap(flip(linspecer));
     scatter(pFAR_S,pHR_S,60,dprime_S, 'filled'); hold on;
-elseif Dprime_Change == 0;
-    Settings.Graph.cmap = colormap(a,cbrewer( 'div', 'BrBG', 100)); %colormap(flip(linspecer));
+elseif Dprime_Change == 0
+    Settings.Graph.cmap = colormap(a, cbrewer( 'div', 'BrBG', 100)); %colormap(flip(linspecer));
     scatter(pFAR_S,pHR_S,60,criterion_S, 'filled'); hold on;
 end
 
