@@ -27,7 +27,37 @@ function [ H, M, FA, CR , Sensitvity_Change, StimulusType] = perdis_SetScenario(
 
 switch NameScenario
     
-    
+  case 'DDS_StayToGoBias';
+        disp('DDS_StayToGoBias')
+        StimulusType = 'Double D-T Stimuli';
+        Sensitvity_Change = 0; 
+% H(1)+ M(1)+ FA(2) == 100 && H(2)+ M(2)+ FA(1) == 100
+        % contra pre
+        H(1)   = 0.2;
+        M(1)   = 0.6;
+        FA(1)  = 0.2; %0.1;
+        CR(1)  = 0.6; %0.6;
+        
+        % ipsi pre
+        H(2)   = 0.2;
+        M(2)   = CR(1);
+        FA(2)  = 0.2;
+        CR(2)  = M(1);
+ 
+     %   H(1)+ M(1)+ FA(2) == 1
+     %   H(2)+ M(2)+ FA(1) == 1
+        sb = 0.3;
+        % contra post
+        H(3)   = H(1)+ sb ; 
+        M(3)   = M(1)- (sb*2) ;
+        FA(3)  = FA(1)+ sb; 
+        CR(3)  = CR(1) - (sb*2);
+        
+        % ispi post
+        H(4)   = H(2)+ sb;
+        M(4)   = CR(3) ;
+        FA(4)  = FA(2)+ sb ;
+        CR(4)  = M(3);  
     case 'Fig4A_SingleStimuli_DifficultDistr_SelectionBiasHypothesis'
         disp('Fig4A_SingleStimuli_DifficultDistr_SelectionBiasHypothesis')
         StimulusType = 'Sgl_Stimuli';

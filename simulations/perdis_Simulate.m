@@ -211,6 +211,29 @@ elseif strcmp(StimulusType , 'Double D-T Stimuli')
     FA_ = [FA(2) FA(1) FA(4) FA(3) ];
     pHit = H ./ (H + M +FA_);
     pFA = FA ./ (FA + CR +H_);
+    
+    
+    H_Bias = [ H(2)+ H(1)  H(4)+ H(3) ];
+    M_Bias = [ M(2)+ M(1)  M(4)+ M(3) ];
+    FA_Bias = [ FA(2)+ FA(1)  FA(4)+ FA(3) ];
+    CR_Bias = [ CR(2)+ CR(1)  CR(4)+ CR(3) ];
+    pHit_Bias = H_Bias ./ (H_Bias + M_Bias +FA_Bias);
+    pFA_Bias = FA_Bias ./ (FA_Bias + CR_Bias + H_Bias);
+    
+    for k = 1:2
+    [dprime_Bias(k),beta_bias(k),criterion_Bias(k)] = perdis_Cal_SDTvariables(pHit_Bias(k),pFA_Bias(k));
+    end
+    
+    disp(H_Bias)
+    disp(M_Bias)
+    disp(FA_Bias)
+
+    disp(pHit_Bias)
+    disp(pFA_Bias)
+
+    disp( criterion_Bias)
+    disp('Bias as Criterion value'); 
+    
 end
 
 % Calculate dprime and criterion
