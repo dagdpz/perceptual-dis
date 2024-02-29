@@ -23,7 +23,7 @@ close all;
 warning off;
 
 % Proportion for Hits, Misses, FA, CR according to the scenario
-[ H, M, FA, CR , Dprime_Change, StimulusType] = perdis_SetScenario( NameScenario );
+[ H, M, FA, CR, Dprime_Change, StimulusType ] = perdis_SetScenario( NameScenario );
 
 n_trials = 100;
 
@@ -32,7 +32,7 @@ M   = single(M*n_trials);
 FA  = single(FA*n_trials);
 CR  = single(CR*n_trials);
 
-%% Check if the proportion adding up to 100 & Calculate the Selection of target vs distractor (To compare with Lydia's findings)
+%% Check if the proportion adding up to 100 & Calculate the Selection of target vs distractor 
 switch StimulusType
     case 'Sgl_Stimuli'
         
@@ -173,7 +173,7 @@ switch StimulusType
         Dis_IpsiFixation(2)     = CR(4) ./ (H(3) + FA(4) + CR(4));
         Dis_ContraFixation(2)   = CR(3) ./ (H(4) + FA(3) + CR(3));
         
-
+        
 end
 
 
@@ -198,43 +198,62 @@ if strcmp(StimulusType , 'Sgl_Stimuli')
     pFA = FA ./ (FA + CR);
     
 elseif strcmp(StimulusType , 'DoubleSameStimuli')
-    % example: pHit = H (contra) ./ (H(contra) + M(contra) +H(ipsi));
-   
+    % example: pHit = H (contra) ./ (H(contra) + M(contra) + H(ipsi));
+    
     H_ = [H(2) H(1) H(4) H(3) ];
     FA_ = [FA(2) FA(1) FA(4) FA(3) ];
-    pHit = H ./ (H + M +H_);
-    pFA = FA ./ (FA + CR +FA_);   
+    pHit = H ./ (H + M + H_);
+    pFA = FA ./ (FA + CR + FA_);
     
 elseif strcmp(StimulusType , 'Double D-T Stimuli')
-    % example: pHit = H (contra) ./ (H(contra) + M(contra) +FA(ipsi));
+    % example: pHit = H (contra) ./ (H(contra) + M(contra) + FA(ipsi));
     H_ = [H(2) H(1) H(4) H(3) ];
     FA_ = [FA(2) FA(1) FA(4) FA(3) ];
-    pHit = H ./ (H + M +FA_);
-    pFA = FA ./ (FA + CR +H_);
+    pHit = H ./ (H + M + FA_);
+    pFA = FA ./ (FA + CR + H_);
+end
+
+
+if 1 % strfind(NameScenario,'Non-hemifield-specific'),
+    % Calculation for non-hemifield specific bias (across both hemifields)
+    H_Bias = [ H(1)+ H(2)  H(3)+ H(4) ];
+    M_Bias = [ M(1)+ M(2)  M(3)+ M(4) ];
+    FA_Bias = [ FA(1)+ FA(2)  FA(3)+ FA(4) ];
+    CR_Bias = [ CR(1)+ CR(2)  CR(3)+ CR(4) ]; % irrelevant for DDS
     
-    
-    H_Bias = [ H(2)+ H(1)  H(4)+ H(3) ];
-    M_Bias = [ M(2)+ M(1)  M(4)+ M(3) ];
-    FA_Bias = [ FA(2)+ FA(1)  FA(4)+ FA(3) ];
-    CR_Bias = [ CR(2)+ CR(1)  CR(4)+ CR(3) ];
-    pHit_Bias = H_Bias ./ (H_Bias + M_Bias +FA_Bias);
-    pFA_Bias = FA_Bias ./ (FA_Bias + CR_Bias + H_Bias);
-    
-    for k = 1:2
-    [dprime_Bias(k),beta_bias(k),criterion_Bias(k)] = perdis_Cal_SDTvariables(pHit_Bias(k),pFA_Bias(k));
+    switch StimulusType
+        
+        case 'Sgl_Stimuli'
+             pHit_Bias = H_Bias ./ (H_Bias + M_Bias);
+             pFA_Bias = FA_Bias ./ (FA_Bias + CR_Bias);
+             
+        case 'DoubleSameStimuli'
+             M_Bias = M_Bias/2; % because M is the same for both hemifields
+             CR_Bias = CR_Bias/2; % because CR is the same for both hemifields
+             
+             pHit_Bias = H_Bias ./ (H_Bias + M_Bias);
+             pFA_Bias = FA_Bias ./ (FA_Bias + CR_Bias);
+             
+        case 'Double D-T Stimuli'
+             pHit_Bias = H_Bias ./ (H_Bias + M_Bias + FA_Bias);
+             pFA_Bias = FA_Bias ./ (H_Bias + M_Bias + FA_Bias);
     end
     
-    disp(H_Bias)
-    disp(M_Bias)
-    disp(FA_Bias)
-
-    disp(pHit_Bias)
-    disp(pFA_Bias)
-
-    disp( criterion_Bias)
-    disp('Bias as Criterion value'); 
+    for k = 1:2
+        [dprime_Bias(k),beta_bias(k),criterion_Bias(k)] = perdis_Cal_SDTvariables(pHit_Bias(k),pFA_Bias(k));
+    end
     
+    disp('Non-hemifield-specific Stay/Go bias');
+    fprintf('Hits: %d, %d\n',H_Bias);
+    fprintf('Misses: %d, %d\n',M_Bias);
+    fprintf('FA: %d, %d\n',FA_Bias);
+    fprintf('CR: %d, %d\n',CR_Bias);
+    fprintf('pHit: %.2f, %.2f\n',pHit_Bias);
+    fprintf('pFA: %.2f, %.2f\n',pFA_Bias);
+    fprintf('Bias: %.2f, %.2f\n',criterion_Bias);
+    disp('..............................................');
 end
+    
 
 % Calculate dprime and criterion
 for k = 1:4
