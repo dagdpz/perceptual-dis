@@ -215,7 +215,7 @@ end
 
 
 if 1 % strfind(NameScenario,'Non-hemifield-specific'),
-    % Calculation for non-hemifield specific bias (across both hemifields)
+    % Calculation for non-hemifield-specific bias (across both hemifields)
     H_Bias = [ H(1)+ H(2)  H(3)+ H(4) ];
     M_Bias = [ M(1)+ M(2)  M(3)+ M(4) ];
     FA_Bias = [ FA(1)+ FA(2)  FA(3)+ FA(4) ];
