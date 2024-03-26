@@ -1,8 +1,8 @@
-N_trials_pre_contra = Data.Hit.difficult.contra.pre + Data.Miss.difficult.contra.pre + Data.FA.difficult.contra.pre;
-N_trials_post_contra = Data.Hit.difficult.contra.post + Data.Miss.difficult.contra.post + Data.FA.difficult.contra.post;
+N_trials_pre_contra = Data.Hit.difficult.contra.pre + Data.Miss.difficult.contra.pre + Data.FA.difficult.ipsi.pre;
+N_trials_post_contra = Data.Hit.difficult.contra.post + Data.Miss.difficult.contra.post + Data.FA.difficult.ipsi.post;
 
-N_trials_pre_ipsi = Data.Hit.difficult.ipsi.pre + Data.Miss.difficult.ipsi.pre + Data.FA.difficult.ipsi.pre;
-N_trials_post_ipsi = Data.Hit.difficult.ipsi.post + Data.Miss.difficult.ipsi.post + Data.FA.difficult.ipsi.post;
+N_trials_pre_ipsi = Data.Hit.difficult.ipsi.pre + Data.Miss.difficult.ipsi.pre + Data.FA.difficult.contra.pre;
+N_trials_post_ipsi = Data.Hit.difficult.ipsi.post + Data.Miss.difficult.ipsi.post + Data.FA.difficult.contra.post;
 
 H(1) = mean(Data.Hit.difficult.contra.pre./N_trials_pre_contra);
 M(1) = mean(Data.Miss.difficult.contra.pre./N_trials_pre_contra);
