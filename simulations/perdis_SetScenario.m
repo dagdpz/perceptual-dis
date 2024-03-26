@@ -400,6 +400,11 @@ switch NameScenario
         FA(4)  = FA(2) + 0.05; % 0.10
         CR(4)  = M(3); % 0.16
         
+        H = [0.9188    0.9238    0.7463    0.7579];
+        M = [0.0267    0.0228    0.1886    0.1213];
+        FA =[0.0545    0.0534    0.0651    0.1208];
+        CR =[0.0534    0.0545    0.1208    0.0651];
+        
     case 'Fig6C_DoubleDifferentStimuli_EasyDistr_SelectionBiasHypothesis'
         disp('Fig6C_DoubleDifferentStimuli_EasyDistr_SelectionBiasHypothesis')
         StimulusType = 'Double D-T Stimuli';
