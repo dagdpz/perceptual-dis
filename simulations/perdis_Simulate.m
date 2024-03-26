@@ -27,12 +27,12 @@ warning off;
 
 n_trials = 100;
 
-H   = single(H*n_trials);
-M   = single(M*n_trials);
-FA  = single(FA*n_trials);
-CR  = single(CR*n_trials);
+H   = single(H*n_trials)
+M   = single(M*n_trials)
+FA  = single(FA*n_trials)
+CR  = single(CR*n_trials)
 
-%% Check if the proportion adding up to 100 & Calculate the Selection of target vs distractor 
+%% Check if the proportions adding up to 100 trials & calculate the selection of target vs distractor 
 switch StimulusType
     case 'Sgl_Stimuli'
         
@@ -62,25 +62,25 @@ switch StimulusType
         Dis_ContraFixation(2)   = CR(3)./ (FA(3) + CR(3));
         
     case 'DoubleSameStimuli'
-        if H(1)+ M(1)+ H(2) == 100 || H(1)+ M(2)+ H(2) == 100
+        if H(1)+ M(1)+ H(2) == 100 && H(1)+ M(2)+ H(2) == 100
             disp('Pre: target-trials: add up to 100')
         else
             disp('Pre: target-trials: DO NOT add up to 100')
             
         end
-        if FA(1)+ CR(1)+ FA(2) == 100 || FA(1)+ CR(2)+ FA(2) == 100
+        if FA(1)+ CR(1)+ FA(2) == 100 && FA(1)+ CR(2)+ FA(2) == 100
             disp('Pre: distractor-trials: add up to 100')
         else
             disp('Pre: distractor-trials: DO NOT add up to 100')
             
         end
-        if H(3)+ M(3)+ H(4) == 100 || H(3)+ M(4)+ H(4) == 100
+        if H(3)+ M(3)+ H(4) == 100 && H(3)+ M(4)+ H(4) == 100
             disp('Post: target-trials: add up to 100')
         else
             disp('Post: target-trials: DO NOT add up to 100')
             
         end
-        if FA(3)+ CR(3)+ FA(4) == 100 || FA(3)+ CR(4)+ FA(4) == 100
+        if FA(3)+ CR(3)+ FA(4) == 100 && FA(3)+ CR(4)+ FA(4) == 100
             disp('Post: distractor-trials: add up to 100')
         else
             disp('Post: distractor-trials: DO NOT add up to 100')
@@ -124,7 +124,7 @@ switch StimulusType
         
         
     case 'Double D-T Stimuli'
-        
+
         if H(1)+ M(1)+ FA(2) == 100 && H(2)+ M(2)+ FA(1) == 100
             disp('Pre: target-trials: add up to 100')
         else
