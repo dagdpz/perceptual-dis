@@ -400,10 +400,11 @@ switch NameScenario
         FA(4)  = FA(2) + 0.05; % 0.10
         CR(4)  = M(3); % 0.16
         
-        H = [0.9188    0.9238    0.7463    0.7579];
-        M = [0.0267    0.0228    0.1886    0.1213];
-        FA =[0.0545    0.0534    0.0651    0.1208];
-        CR =[0.0534    0.0545    0.1208    0.0651];
+        % Actual numbers from M2
+        H = [0.9184    0.9218    0.7004    0.8078];
+        M = [0.0268    0.0222    0.1677    0.1196];
+        FA =[0.0556    0.0548    0.0636    0.1347];
+        CR =[0.0548    0.0556    0.1347    0.0636];
         
     case 'Fig6C_DoubleDifferentStimuli_EasyDistr_SelectionBiasHypothesis'
         disp('Fig6C_DoubleDifferentStimuli_EasyDistr_SelectionBiasHypothesis')

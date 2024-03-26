@@ -36,12 +36,13 @@ CR  = single(CR*n_trials)
 switch StimulusType
     case 'Sgl_Stimuli'
         
-        Accuracy(1)         = (H(2)+H(1)+ CR(1)+ CR(2))/(H(1) + H(2) + M(1)+ M(2)+CR(2) +  FA(1)+ CR(1)+ FA(2));
-        Accuracy(2)         = (H(4)+H(3)+ CR(3)+ CR(4))/   (H(3) + H(4) + M(3)+ M(4)+ CR(4) +  FA(3)+ CR(3)+ FA(4));
+        Accuracy(1)         = (H(2)+H(1) + CR(1) + CR(2))/(H(1) + H(2) + M(1) + M(2) + CR(2) + FA(1)+ CR(1)+ FA(2)); % control
+        Accuracy(2)         = (H(4)+H(3) + CR(3) + CR(4))/(H(3) + H(4) + M(3 )+ M(4) + CR(4) + FA(3)+ CR(3)+ FA(4)); % inactivation
         Accuracy_ipsi(1)    = (H(2)+ CR(2))/(H(2) + M(2)+CR(2) + FA(2));
         Accuracy_ipsi(2)    = (H(4)+ CR(4))/(H(4) + M(4)+ CR(4) + FA(4));
         Accuracy_contra(1)  = (H(1)+ CR(1))/(H(1) + M(1)+CR(1) + FA(1));
         Accuracy_contra(2)  = (H(3)+ CR(3))/(H(3) + M(3)+ CR(3) + FA(3));
+        
         %TargetSelection
         Tar_IpsiSelection(1)    = H(2) ./ (H(2) + M(2));
         Tar_IpsiFixation(1)     = M(2) ./ (H(2) + M(2));
@@ -87,8 +88,8 @@ switch StimulusType
             
         end
         
-        Accuracy(1) = (H(2)+H(1)+ CR(1))/(H(1) + H(2) + M(1) + FA(1)+ CR(1)+ FA(2));
-        Accuracy(2) = (H(4)+H(3)+ CR(3))/(H(3) + H(4) + M(3) + FA(3)+ CR(3)+ FA(4));
+        Accuracy(1) = (H(2) + H(1) + CR(1))/(H(1) + H(2) + M(1) + FA(1)+ CR(1)+ FA(2));
+        Accuracy(2) = (H(4) + H(3) + CR(3))/(H(3) + H(4) + M(3) + FA(3)+ CR(3)+ FA(4));
         
         Accuracy_ipsi(1) = (H(2)+ CR(2))/(H(1) + H(2) + M(1) + FA(1)+ CR(1)+ FA(2));
         Accuracy_ipsi(2) = (H(4)+ CR(4))/(H(3) + H(4) + M(3) + FA(3)+ CR(3)+ FA(4));
@@ -100,7 +101,8 @@ switch StimulusType
         Accuracy_ipsi_V2(2) = (H(4)+ CR(4) + FA(3))/(H(3) + H(4) + M(3) + CR(3)+ FA(4)+ FA(3));
         
         Accuracy_contra_V2(1) = (H(1)+ CR(1) + FA(2))/(H(1) + H(2) + M(1) + FA(1)+ CR(1)+ FA(2));
-        Accuracy_contra_V2(2) = (H(3)+ CR(3)+ FA(4))/(H(3) + H(4) + M(3) + FA(3)+ CR(3)+ FA(4));
+        Accuracy_contra_V2(2) = (H(3)+ CR(3) + FA(4))/(H(3) + H(4) + M(3) + FA(3)+ CR(3)+ FA(4));
+        
         %TargetSelection
         Tar_IpsiSelection(1)    = H(2) ./ (H(1) + H(2) + M(1)); %ipsi
         Tar_ContraSelection(1)  = H(1) ./ (H(1) + H(2) + M(1));
@@ -145,14 +147,15 @@ switch StimulusType
         else
             disp('Post: distractor-trials: DO NOT add up to 100')
         end
-        Accuracy(1) = (H(2)+H(1))/(H(1) + FA(2) + M(1) + FA(1) + CR(1) + H(2) );
-        Accuracy(2) = (H(4)+H(3))/(H(3) + FA(4) + M(3) + FA(3) + CR(3) + H(4));
+        Accuracy(1) = (H(2) + H(1))/(H(1) + FA(2) + M(1) + FA(1) + CR(1) + H(2));
+        Accuracy(2) = (H(4) + H(3))/(H(3) + FA(4) + M(3) + FA(3) + CR(3) + H(4));
         
         Accuracy_ipsi(1) = (H(2))/(H(1) + H(2) + M(1) +  FA(1)+ CR(1)+ FA(2));
         Accuracy_ipsi(2) = (H(4))/(H(3) + H(4) + M(3) +  FA(3)+ CR(3)+ FA(4));
         
         Accuracy_contra(1) = (H(1))/(H(1) + H(2) + M(1) +  FA(1)+ CR(1)+ FA(2));
         Accuracy_contra(2) = (H(3))/(H(3) + H(4) + M(3) +  FA(3)+ CR(3)+ FA(4));
+        
         %TargetSelection
         Tar_IpsiSelection(1)    = H(2) ./ (FA(1) + H(2) + M(1)); %ipsi
         Tar_ContraSelection(1)  = H(1) ./ (H(1) + FA(2) + M(1));
