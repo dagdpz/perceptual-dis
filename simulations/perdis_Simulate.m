@@ -38,10 +38,11 @@ switch StimulusType
         
         Accuracy(1)         = (H(2)+H(1) + CR(1) + CR(2))/(H(1) + H(2) + M(1) + M(2) + CR(2) + FA(1)+ CR(1)+ FA(2)); % control
         Accuracy(2)         = (H(4)+H(3) + CR(3) + CR(4))/(H(3) + H(4) + M(3 )+ M(4) + CR(4) + FA(3)+ CR(3)+ FA(4)); % inactivation
-        Accuracy_ipsi(1)    = (H(2)+ CR(2))/(H(2) + M(2)+CR(2) + FA(2));
-        Accuracy_ipsi(2)    = (H(4)+ CR(4))/(H(4) + M(4)+ CR(4) + FA(4));
         Accuracy_contra(1)  = (H(1)+ CR(1))/(H(1) + M(1)+CR(1) + FA(1));
         Accuracy_contra(2)  = (H(3)+ CR(3))/(H(3) + M(3)+ CR(3) + FA(3));
+        Accuracy_ipsi(1)    = (H(2)+ CR(2))/(H(2) + M(2)+CR(2) + FA(2));
+        Accuracy_ipsi(2)    = (H(4)+ CR(4))/(H(4) + M(4)+ CR(4) + FA(4));
+
         
         %TargetSelection
         Tar_IpsiSelection(1)    = H(2) ./ (H(2) + M(2));
@@ -91,17 +92,18 @@ switch StimulusType
         Accuracy(1) = (H(2) + H(1) + CR(1))/(H(1) + H(2) + M(1) + FA(1)+ CR(1)+ FA(2));
         Accuracy(2) = (H(4) + H(3) + CR(3))/(H(3) + H(4) + M(3) + FA(3)+ CR(3)+ FA(4));
         
-        Accuracy_ipsi(1) = (H(2)+ CR(2))/(H(1) + H(2) + M(1) + FA(1)+ CR(1)+ FA(2));
-        Accuracy_ipsi(2) = (H(4)+ CR(4))/(H(3) + H(4) + M(3) + FA(3)+ CR(3)+ FA(4));
-        
         Accuracy_contra(1) = (H(1)+ CR(1))/(H(1) + H(2) + M(1) + FA(1)+ CR(1)+ FA(2));
         Accuracy_contra(2) = (H(3)+ CR(3))/(H(3) + H(4) + M(3) + FA(3)+ CR(3)+ FA(4));
         
-        Accuracy_ipsi_V2(1) = (H(2)+ CR(2) + FA(1))/(H(1) + H(2) + M(1) + CR(1)+ FA(2)+ FA(1));
-        Accuracy_ipsi_V2(2) = (H(4)+ CR(4) + FA(3))/(H(3) + H(4) + M(3) + CR(3)+ FA(4)+ FA(3));
+        Accuracy_ipsi(1) = (H(2)+ CR(2))/(H(1) + H(2) + M(1) + FA(1)+ CR(1)+ FA(2));
+        Accuracy_ipsi(2) = (H(4)+ CR(4))/(H(3) + H(4) + M(3) + FA(3)+ CR(3)+ FA(4));
         
-        Accuracy_contra_V2(1) = (H(1)+ CR(1) + FA(2))/(H(1) + H(2) + M(1) + FA(1)+ CR(1)+ FA(2));
-        Accuracy_contra_V2(2) = (H(3)+ CR(3) + FA(4))/(H(3) + H(4) + M(3) + FA(3)+ CR(3)+ FA(4));
+%         Accuracy_contra_V2(1) = (H(1)+ CR(1) + FA(2))/(H(1) + H(2) + M(1) + FA(1)+ CR(1)+ FA(2));
+%         Accuracy_contra_V2(2) = (H(3)+ CR(3) + FA(4))/(H(3) + H(4) + M(3) + FA(3)+ CR(3)+ FA(4));
+%         
+%         Accuracy_ipsi_V2(1) = (H(2)+ CR(2) + FA(1))/(H(1) + H(2) + M(1) + CR(1)+ FA(2)+ FA(1));
+%         Accuracy_ipsi_V2(2) = (H(4)+ CR(4) + FA(3))/(H(3) + H(4) + M(3) + CR(3)+ FA(4)+ FA(3));
+        
         
         %TargetSelection
         Tar_IpsiSelection(1)    = H(2) ./ (H(1) + H(2) + M(1)); %ipsi
@@ -150,11 +152,13 @@ switch StimulusType
         Accuracy(1) = (H(2) + H(1))/(H(1) + FA(2) + M(1) + FA(1) + CR(1) + H(2));
         Accuracy(2) = (H(4) + H(3))/(H(3) + FA(4) + M(3) + FA(3) + CR(3) + H(4));
         
-        Accuracy_ipsi(1) = (H(2))/(H(1) + H(2) + M(1) +  FA(1)+ CR(1)+ FA(2));
-        Accuracy_ipsi(2) = (H(4))/(H(3) + H(4) + M(3) +  FA(3)+ CR(3)+ FA(4));
+        Accuracy_contra(1) = (H(1))/(H(1) + H(2) + M(1) + FA(1) + CR(1) + FA(2));
+        Accuracy_contra(2) = (H(3))/(H(3) + H(4) + M(3) + FA(3) + CR(3) + FA(4));     
         
-        Accuracy_contra(1) = (H(1))/(H(1) + H(2) + M(1) +  FA(1)+ CR(1)+ FA(2));
-        Accuracy_contra(2) = (H(3))/(H(3) + H(4) + M(3) +  FA(3)+ CR(3)+ FA(4));
+        Accuracy_ipsi(1) = (H(2))/(H(1) + H(2) + M(1) + FA(1) + CR(1) + FA(2));
+        Accuracy_ipsi(2) = (H(4))/(H(3) + H(4) + M(3) + FA(3) + CR(3) + FA(4));
+        
+
         
         %TargetSelection
         Tar_IpsiSelection(1)    = H(2) ./ (FA(1) + H(2) + M(1)); %ipsi
