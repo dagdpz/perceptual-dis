@@ -5,8 +5,8 @@
 
 
 %% Settings
-SET.SaveGraph           = 1; 
-SET.SaveTable           = 1;
+SET.SaveGraph           = 0; 
+SET.SaveTable           = 0;
 SET.roundValue          = 3; 
 SET.NonParametri        = 0; 
 %% Colors For Plotting
@@ -42,17 +42,7 @@ cd(path);
 path_SaveFig = [path, filesep, 'Output']; 
 %run([path,filesep, 'Settings.m'])
 
-% Check if the folder exists
-if ~exist([path_SaveFig, filesep, monkey], 'dir')
-    % Folder does not exist so create it
-    mkdir([path_SaveFig, filesep, monkey]);
-    disp(['Folder created: ', path_SaveFig, filesep, monkey]);
-else
-    disp(['Folder already exists: ', path_SaveFig]);
-end
-
-
-SDT_singleStimuli_Pub(monkey,path_SaveFig, SET )
-SDT_TargetDistractorStimuli_2H_Pub(monkey,path_SaveFig, SET )
-SDT_doubleSameStimuli_2H_Pub(monkey,path_SaveFig, SET )
+SDT_singleStimuli_Pub(monkey, SET )
+SDT_TargetDistractorStimuli_2H_Pub(monkey, SET )
+SDT_doubleSameStimuli_2H_Pub(monkey, SET )
 
