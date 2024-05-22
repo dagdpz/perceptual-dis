@@ -1,9 +1,7 @@
 # perceptual-dis
 
+Analysis code and SDT simulations for the perceptual **dis**crimination / **dis**tractor study: Dorsal pulvinar inactivation leads to spatial selection bias without perceptual deficit
 
-
-Analysis code and SDT simulations for the perceptual **dis**crimination / **dis**tractor study
-Related to the study: Dorsal pulvinar inactivation leads to spatial selection bias without perceptual deficit
 Kristin Kaduk, Melanie Wilke, Igor Kagan 
 
 
@@ -23,11 +21,14 @@ addpath([path_toRepo , filesep, 'Igtools']) # needs: ig_figure & ig_figurename
 
 ## /Simulations
 
-perdis_Simulate('Fig4A_SingleStimuli_DifficultDistr_SelectionBiasHypothesis')
+perdis_Simulate('Fig4A_SingleStimuli_DifficultDistr_SelectionBiasHypothesis');
 
 ### Resulting figures for each scenario 
+
 Figure 1: The figure corresponding to the figure in the manuscript
+
 Figure 2: Additional plots for changes in hit rate and false alarm rate before and after inactivation
+
 Figure 3: Additional plots showing the distribution of values for the criterion, d-prime and accuracy
 
 

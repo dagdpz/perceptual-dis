@@ -1,10 +1,9 @@
 function perdis_Simulate(NameScenario)
-% perdis_Simulate - simulates data
-% according to the assumptions of the spatial selection bias hypothesis or
-% perceptual discrimination hypiothesis
+% perdis_Simulate - simulates data according to the assumptions of the spatial selection bias hypothesis or
+% perceptual discrimination hypothesis
 
 % USAGE:
-% perdis_Simulate('Fig4A_SingleStimuli_DifficultDistr_SelectionBiasHypothesis')
+% perdis_Simulate('Fig4A_SingleStimuli_DifficultDistr_SelectionBiasHypothesis');
 
 % INPUTS:
 % Name of the simulated Scenario (all predefined scenarios can be found in perdis_SetScenario)
