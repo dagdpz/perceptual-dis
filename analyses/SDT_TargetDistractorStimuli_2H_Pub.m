@@ -274,7 +274,7 @@ if Da.SDT.DDS.criterion.difficult.contra.pvalue < 0.05
 end
 axis square
 xlabel('sensitivity','fontsize',SET.Plot.fs,'fontweight','b', 'Interpreter', 'none')
-ylabel('Da.SDT.DDS.criterion','fontsize',SET.Plot.fs,'fontweight','b', 'Interpreter', 'none')
+ylabel('criterion','fontsize',SET.Plot.fs,'fontweight','b', 'Interpreter', 'none')
 set(gca,'ylim',[-3 3],'xlim',SET.Plot.xlim_SDT_diff,'fontsize',SET.Plot.fs)
 
 text(SET.Plot.xlim_SDT_diff(1)+0.1,-2.8, 'more Contra (ipsi:NoGo, contra:Go)', 'Color', 'k','fontsize',18)
