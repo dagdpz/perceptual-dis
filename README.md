@@ -21,7 +21,26 @@ addpath([path_toRepo , filesep, 'Igtools']) # needs: ig_figure & ig_figurename
 
 ## /Simulations
 
+The main simulation function `perdis_Simulate.m` implements computational models for analyzing perceptual discrimination and spatial selection bias. It simulates behavioral data according to the assumptions of the spatial selection bias hypothesis or perceptual discrimination hypothesis.
+
+### Usage
+```matlab
 perdis_Simulate('Fig4A_SingleStimuli_DifficultDistr_SelectionBiasHypothesis');
+```
+
+### Key Features
+- Simulates behavioral data for different stimulus conditions:
+  - Single Stimuli
+  - Double Same Stimuli
+  - Double D-T Stimuli
+- Calculates key behavioral metrics:
+  - Hit rates and False alarm rates
+  - D-prime (sensitivity)
+  - Response criterion
+  - Accuracy
+  - Spatial selections (ipsilateral and contralateral)
+- Includes corrections for edge cases (zero or infinite probabilities)
+- Generates comprehensive visualization plots
 
 ### Resulting figures for each scenario 
 
@@ -32,9 +51,6 @@ Figure 2: Additional plots for changes in hit rate and false alarm rate before a
 Figure 3: Additional plots showing the distribution of values for the criterion, d-prime and accuracy
 
 
-
-
-
-## Acknowledgement
+## Acknowledgments
 Thanks to Charles Robert whose function cbrewer is used in the code
 
